@@ -52,16 +52,16 @@ public class Main {
 
                     if (opcaoCadastro < 1 || opcaoCadastro > 4) {
                         System.out.println("Opção inválida!");
-                        
+
                     } else {
                         String tipo = Market.definirTipo(opcaoCadastro + 1);
 
                         System.out.print("Digite o código do produto: ");
                         int codigo = sc.nextInt();
-                        
+
                         if (Market.verificarCodigoNaLista(codigo)) {
                             System.out.println("\nCódigo do veículo já cadastrado!");
-                            
+
                         } else {
                             System.out.print("Digite a marca: ");
                             sc.nextLine();
@@ -83,14 +83,14 @@ public class Main {
                             int estoque = response == 's' ? sc.nextInt() : 0;
 
                             Market.cadastrar(tipo, marca, modelo, cor, ano, codigo, estoque);
-                            
+
                         }//Else
                     }//Else
                     break;
 
                 case 3: // Adicionar
                     if (Market.todosOsVeiculos.size() == 0) {
-                        System.out.println("Não existe veículo cadastrado!");
+                        System.out.println("Não existe veículo cadastrado no sistema!");
                         break;
                     }
                     System.out.print("Digite o código do veículo que deseja adicionar estoque: ");
@@ -104,14 +104,14 @@ public class Main {
                         Market.adicionar(codigo, quantidade);
 
                     } else {
-                        System.out.println("Não existe veículo com este código!");
+                        System.out.println("\nNão existe veículo com este código!");
                     }//Else
 
                     break;
 
                 case 4: // Remover
                     if (Market.todosOsVeiculos.size() == 0) {
-                        System.out.println("Não existe veículo cadastrado!");
+                        System.out.println("Não existe veículo cadastrado no sistema!");
 
                     } else {
                         System.out.print("Digite o código do veículo que deseja remover: ");
@@ -122,11 +122,11 @@ public class Main {
                             	if (i.estoque == 0) {
                             		Market.remover(i);
                             		break;
-                            	} else {                            		
+                            	} else {
                             		System.out.println("⚠⚠ Esta opção remove o veículo e todo o seu estoque ⚠⚠");
                             		System.out.print("Deseja realmente remover este produto ? (s/n): ");
                             		char response = sc.next().charAt(0);
-                            		
+
                             		if (response == 's') {
                             			Market.remover(i);
                             			break;
@@ -134,16 +134,17 @@ public class Main {
 
                                 }
                             } else {
-                                System.out.println("Não existe veículo com este código!");
+                                System.out.println("\nNão existe veículo com este código!");
                             }//Else
                         }//For
                         break;
                     }//Else
+                    break;
 
                 case 5: // Vender
 
                     if (Market.todosOsVeiculos.size() == 0) {
-                        System.out.println("Não existe veículo cadastrado!");
+                        System.out.println("Não existe veículo cadastrado no sistema!");
                         break;
                     }
 
