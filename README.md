@@ -30,11 +30,13 @@ Antes de executar o sistema, certifique-se de ter o seguinte:
 - [Java Development Kit (JDK)](https://www.oracle.com/br/java/technologies/downloads/#java17) instalado em sua máquina.
 
 ## 🖱 Como Executar
-<p>
+
 1 - Clone este repositório em sua máquina local.
+
 2 - Abra o projeto em uma IDE de Java.
+
 3 - Compile e rode o programa.
-</p>
+
 ### ✏ Autores
 
 - [Yuri](https://github.com/Yuri-Diego)
