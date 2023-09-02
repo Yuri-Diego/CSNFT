@@ -4,7 +4,7 @@
 
 ## 📃 Descrição
 
-Este é um projeto Java que implementa um sistema de vendas de veículos 
+Este é um projeto Java que implementa um sistema de vendas de veículos em POO. 
 
 ## 💡 Funcionalidades
 
