@@ -81,13 +81,7 @@ public class Market {
             }//If
         }//For
             return false;
-    }//Procurar
-
-    public static boolean listaVazia() {
-        if (todosOsVeiculos.size() == 0) {
-            return true;
-        } return false;
-    }//ListaVazia
+    }//VerificarCodigoNaLista
 
     public static int verificarPorTipo(int opcao) {
         int contador = 0;
