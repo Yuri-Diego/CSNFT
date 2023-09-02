@@ -31,9 +31,9 @@ Antes de executar o sistema, certifique-se de ter o seguinte:
 
 ## 🖱 Como Executar
 
-1- Clone este repositório em sua máquina local.
-2- Abra o projeto em uma IDE de Java.
-3- Compile e rode o programa.
+1 - Clone este repositório em sua máquina local.
+2 - Abra o projeto em uma IDE de Java.
+3 - Compile e rode o programa.
 
 ### ✏ Autores
 
