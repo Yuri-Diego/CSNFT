@@ -37,9 +37,9 @@ Antes de executar o sistema, certifique-se de ter o seguinte:
 
 ### ✏ Autores
 
-[Yuri](https://github.com/Yuri-Diego)
-[Silas](https://github.com/SilasMiguel)
-[Joao Victor](https://github.com/vitorjoao210)
-[Alex](https://github.com/Alex13junior)
-[Luan](https://github.com/luanrrsouza)
+- [Yuri](https://github.com/Yuri-Diego)
+- [Silas](https://github.com/SilasMiguel)
+- [Joao Victor](https://github.com/vitorjoao210)
+- [Alex](https://github.com/Alex13junior)
+- [Luan](https://github.com/luanrrsouza)
 
