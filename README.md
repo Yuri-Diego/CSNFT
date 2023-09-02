@@ -1,4 +1,4 @@
-# CSNFT
+# Cars Sale NFT
 
 Java jdk 17
 

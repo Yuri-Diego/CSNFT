@@ -18,7 +18,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int opcao = 1;
-        System.out.println("\n                    🏍🚗🚚🚌 [ BEM-VINDO AO CARS SOLD NFT ] 🏍🚗🚚🚌");        
+        System.out.println("\n                    🏍🚗🚚🚌 [ BEM-VINDO AO CARS SALE NFT ] 🏍🚗🚚🚌");
         while (opcao != 6) {
         	
             System.out.println("\n");
