@@ -48,26 +48,32 @@ public class Market {
     	for (Veiculo veiculo : todosOsVeiculos) {
             if (codigo == veiculo.codigo) {
             	veiculo.estoque += quantidade;
+                System.out.println(veiculo.nome + " | " + quantidade + " unidades adicionadas com sucesso!");
             }//If
     	}//For
     }//Adicionar
 
-    public static void remover(Veiculo veiculo) {
-        todosOsVeiculos.remove(veiculo);
-        System.out.println("\n" + veiculo + " | Removido com sucesso!");
+    public static void remover(int codigo) {
+        for (Veiculo veiculo : todosOsVeiculos) {
+            if (codigo == veiculo.codigo) {
+                todosOsVeiculos.remove(veiculo);
+                System.out.println("\n" + veiculo + " | Removido com sucesso!");
+                break;
+            }
+        }
 
     }//Remover
 
     public static void vender(int codigo, int quantidade) {
     	for (Veiculo veiculo : todosOsVeiculos) {
-            if (verificarCodigoNaLista(codigo)) {
+            if (verificarCodigoNaLista(codigo) && veiculo.codigo == codigo) {
             	
-            	if (quantidade < veiculo.estoque) {            		
+            	if (quantidade < veiculo.estoque + 1) {
             		veiculo.estoque -= quantidade;
             		System.out.println(veiculo.nome + " | " + quantidade + " unidades vendidas com sucesso!");
             		
             	} else {
-            		System.out.println("Só temos " + veiculo.estoque + " unidades disponíveis no estoque");
+            		System.out.println("Só temos " + veiculo.estoque + " unidades disponíveis no estoque!");
             		
             	}//Else
             }//If

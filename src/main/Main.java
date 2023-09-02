@@ -118,29 +118,34 @@ public class Main {
                         codigo = sc.nextInt();
 
                         for (Veiculo i : Market.todosOsVeiculos) {
-                            if (codigo == i.codigo) {
-                            	if (i.estoque == 0) {
-                            		Market.remover(i);
-                            		break;
-                            	} else {
-                            		System.out.println("⚠⚠ Esta opção remove o veículo e todo o seu estoque ⚠⚠");
-                            		System.out.print("Deseja realmente remover este produto ? (s/n): ");
-                            		char response = sc.next().charAt(0);
-
-                            		if (response == 's') {
-                            			Market.remover(i);
-                            			break;
-                            		}
-
+                            if (Market.verificarCodigoNaLista(codigo) && i.estoque == 0) {
+                                if (i.codigo != codigo) {
+                                    continue;
                                 }
+                                Market.remover(codigo);
+
+                                break;
+                            } else if (Market.verificarCodigoNaLista(codigo)){
+                                System.out.println("⚠⚠ Esta opção remove o veículo e todo o seu estoque ⚠⚠");
+                                System.out.print("Deseja realmente remover este produto ? (s/n): ");
+                                char response = sc.next().charAt(0);
+
+                                if (response == 's') {
+                                    Market.remover(codigo);
+                                    break;
+
+                                } else {
+                                    System.out.println("\nVoltando ao menu...");
+                                    break;
+
+                                }//Else
                             } else {
                                 System.out.println("\nNão existe veículo com este código!");
+                                break;
                             }//Else
                         }//For
-                        break;
                     }//Else
                     break;
-
                 case 5: // Vender
 
                     if (Market.todosOsVeiculos.size() == 0) {
