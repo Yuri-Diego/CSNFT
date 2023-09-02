@@ -47,7 +47,7 @@ public class Market {
     public static void adicionar(int codigo, int quantidade) {
     	for (Veiculo veiculo : todosOsVeiculos) {
             if (codigo == veiculo.codigo) {
-            	veiculo.estoque =+ quantidade;
+            	veiculo.estoque += quantidade;
             }//If
     	}//For
     }//Adicionar
