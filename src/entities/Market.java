@@ -37,11 +37,8 @@ public class Market {
 
     }//ListarPorTipo
    
-    public static void cadastrar(String tipo, String marca, String modelo, String cor, int ano, int codigo, int estoque) {
-        Veiculo veiculo = new Veiculo(tipo, marca, modelo, cor, ano, codigo, estoque);
+    public static void cadastrar(Veiculo veiculo) {
         todosOsVeiculos.add(veiculo);
-        System.out.println();
-        System.out.println(veiculo.nome + " cadastrado com sucesso. Código: " + codigo + ", Estoque: " + estoque);
     }//Cadastrar
 
     public static void adicionar(int codigo, int quantidade) {

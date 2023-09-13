@@ -82,7 +82,11 @@ public class Main {
                             System.out.print(response == 's' ? "Digite a quantidade que deseja adicionar ao estoque: " : "");
                             int estoque = response == 's' ? sc.nextInt() : 0;
 
-                            Market.cadastrar(tipo, marca, modelo, cor, ano, codigo, estoque);
+                            Veiculo veiculo = new Veiculo(tipo, marca, modelo, cor, ano, codigo, estoque);
+                            Market.cadastrar(veiculo);
+                            
+                            System.out.println();
+                            System.out.println(veiculo.nome + " cadastrado com sucesso. Código: " + codigo + ", Estoque: " + estoque);
 
                         }//Else
                     }//Else
