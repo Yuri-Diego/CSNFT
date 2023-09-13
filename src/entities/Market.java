@@ -45,7 +45,6 @@ public class Market {
     	for (Veiculo veiculo : todosOsVeiculos) {
             if (codigo == veiculo.codigo) {
             	veiculo.estoque += quantidade;
-                System.out.println(veiculo.nome + " | " + quantidade + " unidades adicionadas com sucesso!");
             }//If
     	}//For
     }//Adicionar
@@ -54,25 +53,18 @@ public class Market {
         for (Veiculo veiculo : todosOsVeiculos) {
             if (codigo == veiculo.codigo) {
                 todosOsVeiculos.remove(veiculo);
-                System.out.println("\n" + veiculo + " | Removido com sucesso!");
                 break;
-            }
-        }
-
+            }//If
+        }//For
     }//Remover
 
     public static void vender(int codigo, int quantidade) {
     	for (Veiculo veiculo : todosOsVeiculos) {
             if (verificarCodigoNaLista(codigo) && veiculo.codigo == codigo) {
-            	
-            	if (quantidade < veiculo.estoque + 1) {
+
+            	if (quantidade <= veiculo.estoque) {
             		veiculo.estoque -= quantidade;
-            		System.out.println(veiculo.nome + " | " + quantidade + " unidades vendidas com sucesso!");
-            		
-            	} else {
-            		System.out.println("Só temos " + veiculo.estoque + " unidades disponíveis no estoque!");
-            		
-            	}//Else
+            	}
             }//If
     	}//For
     }//Vender
@@ -104,9 +96,18 @@ public class Market {
             case 3 -> tipo = "Moto";
             case 4 -> tipo = "Caminhao";
             case 5 -> tipo = "Onibus";
-            default -> System.out.println("Opção Inválida!");
+
         }//Switch
         return tipo;
     }//DefinirTipo
+
+    public static Veiculo getVeiculo(int codigo) {
+        for (Veiculo veiculo : todosOsVeiculos) {
+            if (codigo == veiculo.codigo ) {
+                return veiculo;
+            }//If
+        }//For
+        return null;
+    }//getVeiculo
 
 }//Class
