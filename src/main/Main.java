@@ -86,7 +86,7 @@ public class Main {
                             Market.cadastrar(veiculo);
                             
                             System.out.println();
-                            System.out.println(veiculo.nome + " cadastrado com sucesso. Código: " + codigo + ", Estoque: " + estoque);
+                            System.out.println(veiculo.getNome() + " cadastrado com sucesso. Código: " + codigo + ", Estoque: " + estoque);
 
                         }//Else
                     }//Else
@@ -106,7 +106,7 @@ public class Main {
                         int quantidade = sc.nextInt();
 
                         Market.adicionar(codigo, quantidade);
-                        System.out.println("\n" + Market.getVeiculo(codigo).nome + " | " + quantidade + " unidades adicionadas com sucesso!");
+                        System.out.println("\n" + Market.getVeiculo(codigo).getNome() + " | " + quantidade + " unidades adicionadas com sucesso!");
 
                     } else {
                         System.out.println("\nNão existe veículo com este código!");
@@ -123,8 +123,8 @@ public class Main {
                         codigo = sc.nextInt();
 
                         for (Veiculo i : Market.todosOsVeiculos) {
-                            if (Market.verificarCodigoNaLista(codigo) && i.estoque == 0) {
-                                if (i.codigo != codigo) {
+                            if (Market.verificarCodigoNaLista(codigo) && i.getEstoque() == 0) {
+                                if (i.getCodigo() != codigo) {
                                     continue;
                                 }
                                 System.out.println("\n" + Market.getVeiculo(codigo) + " | Removido com sucesso!");
@@ -166,12 +166,12 @@ public class Main {
                         System.out.print("Digite a quantidade que deseja vender: ");
                         int quantidade = sc.nextInt();
 
-                        if (quantidade <= Market.getVeiculo(codigo).estoque) {
+                        if (quantidade <= Market.getVeiculo(codigo).getEstoque()) {
                             Market.vender(codigo, quantidade);
-                            System.out.println("\n" + Market.getVeiculo(codigo).nome + " | " + quantidade + " unidades vendidas com sucesso!");
+                            System.out.println("\n" + Market.getVeiculo(codigo).getNome() + " | " + quantidade + " unidades vendidas com sucesso!");
 
                         } else {
-                            System.out.println("\n" + "Só temos " + Market.getVeiculo(codigo).estoque + " unidades disponíveis no estoque!");
+                            System.out.println("\n" + "Só temos " + Market.getVeiculo(codigo).getEstoque() + " unidades disponíveis no estoque!");
                         }
 
                     } else {

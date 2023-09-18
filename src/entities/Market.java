@@ -29,7 +29,7 @@ public class Market {
             String tipo = definirTipo(opcao);
 
             for (Veiculo veiculo : todosOsVeiculos) {
-                if (veiculo.tipo.equals(tipo) ) {
+                if (veiculo.getCategoria().equals(tipo) ) {
                     System.out.println(veiculo);
                 }//If
             }//For
@@ -43,15 +43,15 @@ public class Market {
 
     public static void adicionar(int codigo, int quantidade) {
     	for (Veiculo veiculo : todosOsVeiculos) {
-            if (codigo == veiculo.codigo) {
-            	veiculo.estoque += quantidade;
+            if (codigo == veiculo.getCodigo()) {
+            	veiculo.addEstoque(quantidade);
             }//If
     	}//For
     }//Adicionar
 
     public static void remover(int codigo) {
         for (Veiculo veiculo : todosOsVeiculos) {
-            if (codigo == veiculo.codigo) {
+            if (codigo == veiculo.getCodigo()) {
                 todosOsVeiculos.remove(veiculo);
                 break;
             }//If
@@ -60,10 +60,9 @@ public class Market {
 
     public static void vender(int codigo, int quantidade) {
     	for (Veiculo veiculo : todosOsVeiculos) {
-            if (verificarCodigoNaLista(codigo) && veiculo.codigo == codigo) {
-
-            	if (quantidade <= veiculo.estoque) {
-            		veiculo.estoque -= quantidade;
+            if (verificarCodigoNaLista(codigo) && veiculo.getCodigo() == codigo) {
+            	if (quantidade <= veiculo.getEstoque()) {
+            		veiculo.remEstoque(quantidade);
             	}
             }//If
     	}//For
@@ -71,7 +70,7 @@ public class Market {
 
     public static boolean verificarCodigoNaLista(int codigo) {
         for (Veiculo veiculo : todosOsVeiculos) {
-            if (codigo == veiculo.codigo ) {
+            if (codigo == veiculo.getCodigo() ) {
                 return true;
             }//If
         }//For
@@ -81,7 +80,7 @@ public class Market {
     public static int verificarPorTipo(int opcao) {
         int contador = 0;
         for (Veiculo veiculo : todosOsVeiculos) {
-            if (veiculo.tipo.equals(definirTipo(opcao))) {
+            if (veiculo.getCategoria().equals(definirTipo(opcao))) {
                 contador++;
             }//If
         }//For
@@ -103,7 +102,7 @@ public class Market {
 
     public static Veiculo getVeiculo(int codigo) {
         for (Veiculo veiculo : todosOsVeiculos) {
-            if (codigo == veiculo.codigo ) {
+            if (codigo == veiculo.getCodigo() ) {
                 return veiculo;
             }//If
         }//For
