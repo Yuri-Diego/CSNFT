@@ -3,18 +3,18 @@ package entities;
 
 public class Veiculo {
 	protected static int contador = 1;
+	protected static int codigo;
 	protected String categoria;
     protected String marca;
     protected String modelo;
     protected String cor;
     protected int ano;
-    protected static int codigo;
     protected int estoque;
     protected String nome;
     protected double custo;
     protected double valorDeVenda;
 
-    
+
     //Construtor sem estoque
     public Veiculo(String categoria, String marca, String modelo, String cor, int ano, double custo, double valorDeVenda) {
     	this.categoria = categoria;
@@ -29,7 +29,7 @@ public class Veiculo {
 		contador++;
     }//Construtor sem estoque
 
-    
+
     //Construtor com estoque
     public Veiculo(String categoria, String marca, String modelo, String cor, int ano, double custo, double valorDeVenda, int estoque) {
     	this.categoria = categoria;
@@ -44,7 +44,7 @@ public class Veiculo {
 		codigo = contador;
 		contador++;
     }//Construtor com estoque
-    
+
 
 
 	public String getCategoria() {
@@ -102,11 +102,17 @@ public class Veiculo {
 	}
 
 
-	public void addEstoque(int valor) {
-		this.estoque += valor;
+	public boolean addEstoque(int quantidade) {
+		if (quantidade >= 0) {
+			estoque += quantidade;
+
+			return true;
+		}
+		return false;
 	}
-	
-	
+
+
+
 	public void remEstoque(int valor) {
 		this.estoque -= valor;
 	}
@@ -124,18 +130,18 @@ public class Veiculo {
 	public double getCusto() {
 		return custo;
 	}
-	
-	
+
+
 	public void setCusto(double custo) {
 		this.custo = custo;
 	}
-	
-	
+
+
 	public double getValorDeVenda() {
 		return valorDeVenda;
 	}
-	
-	
+
+
 	public void setValorDeVenda(double valorDeVenda) {
 		this.valorDeVenda = valorDeVenda;
 	}
@@ -157,3 +163,4 @@ public class Veiculo {
 	}//toString
 
 }//Class
+

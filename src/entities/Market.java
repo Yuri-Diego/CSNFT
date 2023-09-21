@@ -7,7 +7,15 @@ public class Market {
 
     public static List<Veiculo> todosOsVeiculos = new ArrayList<>();
 
-    public static double saldo = 50000;
+    private static double saldo = 50000;
+
+    public static double getSaldo() {
+        return saldo;
+    }
+
+    public static void setSaldo(double saldo) {
+        Market.saldo = saldo;
+    }
 
     public static void listarTodos() {
         if (todosOsVeiculos.size() == 0) {
@@ -21,7 +29,12 @@ public class Market {
     }//ListarTodos
 
     public static void listarPorCategoria(int opcao) {
-        int quantidade = verificarPorCategoria(opcao);
+        int quantidade = 0;
+        for (Veiculo veiculo : todosOsVeiculos) {
+            if (veiculo.getCategoria().equals(definirCategoria(opcao))) {
+                quantidade++;
+            }
+        }
 
         if (quantidade == 0) {
             System.out.println("Não existe nenhum cadastro de " + definirCategoria(opcao));
@@ -78,16 +91,6 @@ public class Market {
             return false;
     }//VerificarCodigoNaLista
 
-    public static int verificarPorCategoria(int opcao) {
-        int contador = 0;
-        for (Veiculo veiculo : todosOsVeiculos) {
-            if (veiculo.getCategoria().equals(definirCategoria(opcao))) {
-                contador++;
-            }//If
-        }//For
-        return contador;
-    }//VerificarPorTipo
-
     public static String definirCategoria(int opcao) {
         String categoria = "";
         switch (opcao) {
@@ -110,3 +113,16 @@ public class Market {
     }//getVeiculo
 
 }//Class
+
+/*
+double custoFinal = custo * quantidade;
+
+		if (custoFinal > Market.getSaldo() || quantidade < 0) {
+			System.out.println("");
+		} else {
+			estoque += quantidade;
+
+			double saldo = Market.getSaldo() - custoFinal;
+			Market.setSaldo(saldo);
+		}
+ */

@@ -99,14 +99,32 @@ public class Main {
 
 
                             default:
-                        }
+                        }//Switch
                         Market.cadastrar(veiculo);
                         System.out.println(veiculo.getNome() + "Cadastrado com sucesso!");
+
+                        System.out.println("Deseja adicionar um estoque ? (s/n)");
+                        char escolha = sc.next().charAt(0);
+
+                        if (escolha == 'n') {
+
+                        } else {
+                            System.out.print("Digite a quantidade que deseja adicionar ao estoque: ");
+                            int quantidade = sc.nextInt();
+
+                            if (quantidade < 0) {
+                                System.out.println("Não pode adicionar quantidade negativa!");
+                            } else {
+                                System.out.println("");
+                            }
+                        }
+
                         break;
                     } else {
                         System.out.println("Opção inválida!");
                     }
                     break;
+
                 case 3: // Adicionar
                     if (Market.todosOsVeiculos.size() == 0) {
                         System.out.println("Não existe veículo cadastrado no sistema!");
