@@ -6,8 +6,7 @@ package main;
 //João Vitor Pereira da Silva
 //Yuri Diego Almeida Silva dos Santos
 
-import entities.Market;
-import entities.Veiculo;
+import entities.*;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -31,67 +30,83 @@ public class Main {
             switch (opcao) {
                 case 1: // Listar
                     System.out.println("                      ~~~~~~[  LISTAR  ]~~~~~~");
-                    System.out.println("[ 1 ]-Todos  [ 2 ]-Carro  [ 3 ]-Moto  [ 4 ]-Caminhao  [ 5 ]-Onibus");
+                    System.out.println("[ 1 ]-Todos  [ 2 ]-Carro  [ 3 ]-Moto  [ 4 ]-Caminhao");
                     System.out.print(" ↪ ");
                     opcao = sc.nextInt();
                     System.out.print("\n");
 
                     switch (opcao) {
                         case 1 -> Market.listarTodos();
-                        case 2, 3, 4, 5 -> Market.listarPorTipo(opcao);
+                        case 2, 3, 4 -> Market.listarPorCategoria(opcao);
                         default -> System.out.println("Opção inválida!");
                     }
                     break;
 
                 case 2: // Cadastrar
                     System.out.println("             ~~~~~~[  CADASTRAR  ]~~~~~~");
-                    System.out.println("[ 1 ]-Carro  [ 2 ]-Moto  [ 3 ]-Caminhao  [ 4 ]-Onibus");
+                    System.out.println("       [ 1 ]-Carro  [ 2 ]-Moto  [ 3 ]-Caminhao");
                     System.out.print(" ↪ ");
                     int opcaoCadastro = sc.nextInt();
                     System.out.print("\n");
 
-                    if (opcaoCadastro < 1 || opcaoCadastro > 4) {
-                        System.out.println("Opção inválida!");
+                    if (opcaoCadastro > 0 && opcaoCadastro < 4) {
 
+                        sc.nextLine();
+                        System.out.print("Digite a marca: ");
+                        String marca = sc.nextLine();
+                        System.out.print("Digite o modelo: ");
+                        String modelo = sc.nextLine();
+                        System.out.print("Digite a cor: ");
+                        String cor = sc.nextLine();
+                        System.out.print("Digite o ano: ");
+                        int ano = sc.nextInt();
+
+                        String categoria = Market.definirCategoria(opcaoCadastro + 1);
+
+                        System.out.print("Digite o custo de compra: ");
+                        double custo = sc.nextDouble();
+                        System.out.print("Digite o valor da venda: ");
+                        double valorDeVenda = sc.nextDouble();
+                        sc.nextLine();
+
+                        Veiculo veiculo = new Veiculo(categoria, marca, modelo, cor, ano, custo, valorDeVenda);
+
+                        switch (opcaoCadastro) {
+
+                            case 1:
+
+                                System.out.print("Digite o cambio: ");
+                                String cambio = sc.nextLine();
+                                System.out.print("Digite a potência do motor: ");
+                                double motor = sc.nextDouble();
+
+                                veiculo = new Carro(categoria, marca, modelo, cor, ano, custo, valorDeVenda, cambio, motor);
+                                break;
+                            case 2:
+
+                                System.out.print("Digite a cinlindrada: ");
+                                int cilindrada = sc.nextInt();
+
+                                veiculo = new Moto(categoria, marca, modelo, cor, ano, custo, valorDeVenda, cilindrada);
+                                break;
+                            case 3:
+
+                                System.out.print("Digite o tipo: ");
+                                String tipo = sc.nextLine();
+
+                                veiculo = new Caminhao(categoria, marca, modelo, cor, ano, custo, valorDeVenda, tipo);
+                                break;
+
+
+                            default:
+                        }
+                        Market.cadastrar(veiculo);
+                        System.out.println(veiculo.getNome() + "Cadastrado com sucesso!");
+                        break;
                     } else {
-                        String tipo = Market.definirTipo(opcaoCadastro + 1);
-
-                        System.out.print("Digite o código do produto: ");
-                        int codigo = sc.nextInt();
-
-                        if (Market.verificarCodigoNaLista(codigo)) {
-                            System.out.println("\nCódigo do veículo já cadastrado!");
-
-                        } else {
-                            System.out.print("Digite a marca: ");
-                            sc.nextLine();
-                            String marca = sc.nextLine();
-
-                            System.out.print("Digite o modelo: ");
-                            String modelo = sc.nextLine();
-
-                            System.out.print("Digite a cor: ");
-                            String cor = sc.nextLine();
-
-                            System.out.print("Digite o ano: ");
-                            int ano = sc.nextInt();
-
-                            System.out.print("Deseja adicionar um estoque ao veículo ? (s/n): ");
-                            char response = sc.next().charAt(0);
-
-                            System.out.print(response == 's' ? "Digite a quantidade que deseja adicionar ao estoque: " : "");
-                            int estoque = response == 's' ? sc.nextInt() : 0;
-
-                            Veiculo veiculo = new Veiculo(tipo, marca, modelo, cor, ano, codigo, estoque);
-                            Market.cadastrar(veiculo);
-                            
-                            System.out.println();
-                            System.out.println(veiculo.getNome() + " cadastrado com sucesso. Código: " + codigo + ", Estoque: " + estoque);
-
-                        }//Else
-                    }//Else
+                        System.out.println("Opção inválida!");
+                    }
                     break;
-
                 case 3: // Adicionar
                     if (Market.todosOsVeiculos.size() == 0) {
                         System.out.println("Não existe veículo cadastrado no sistema!");

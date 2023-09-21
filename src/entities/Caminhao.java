@@ -25,11 +25,21 @@ public class Caminhao extends Veiculo {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
-	
+
 	@Override
-    public String toString() {
-        return super.toString();
-    }//toString
-	
-}
+	public String toString() {
+		return nome +
+				" (cod.: " +
+				codigo +
+				" | estoque: " +
+				estoque +
+				" | atributos: " +
+				tipo +
+				" | custo de compra: " +
+				custo +
+				" | valor de venda: " +
+				valorDeVenda +
+				")";
+	}//toString
+
+}//Class

@@ -35,22 +35,22 @@ public class Carro extends Veiculo {
 		this.motor = motor;
 	}
 
-	
+
 	@Override
-    public String toString() {
-        return nome +
-                " (cod.: " +
-                codigo +
-                " | estoque: " +
-                estoque +
-                " | categoria: " +
-                categoria +
-                " | custo de compra: " +
-                custo + 
-                " | valor de venda: " +
-                valorDeVenda + 
-                ")";
-    }//toString
+	public String toString() {
+		return nome +
+				" (cod.: " +
+				codigo +
+				" | estoque: " +
+				estoque +
+				" | atributos: " +
+				cambio + " " + motor +
+				" | custo de compra: " +
+				custo +
+				" | valor de venda: " +
+				valorDeVenda +
+				")";
+	}//toString
 	
 
 }

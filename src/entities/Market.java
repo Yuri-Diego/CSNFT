@@ -7,6 +7,7 @@ public class Market {
 
     public static List<Veiculo> todosOsVeiculos = new ArrayList<>();
 
+    public static double saldo = 50000;
 
     public static void listarTodos() {
         if (todosOsVeiculos.size() == 0) {
@@ -19,23 +20,23 @@ public class Market {
         }//Else
     }//ListarTodos
 
-    public static void listarPorTipo(int opcao) {
-        int quantidade = verificarPorTipo(opcao);
+    public static void listarPorCategoria(int opcao) {
+        int quantidade = verificarPorCategoria(opcao);
 
         if (quantidade == 0) {
-            System.out.println("Não existe nenhum cadastro de " + definirTipo(opcao));
+            System.out.println("Não existe nenhum cadastro de " + definirCategoria(opcao));
 
         } else {
-            String tipo = definirTipo(opcao);
+            String categoria = definirCategoria(opcao);
 
             for (Veiculo veiculo : todosOsVeiculos) {
-                if (veiculo.getCategoria().equals(tipo) ) {
+                if (veiculo.getCategoria().equals(categoria) ) {
                     System.out.println(veiculo);
                 }//If
             }//For
         }//Else
 
-    }//ListarPorTipo
+    }//ListarPorCategoria
    
     public static void cadastrar(Veiculo veiculo) {
         todosOsVeiculos.add(veiculo);
@@ -77,27 +78,26 @@ public class Market {
             return false;
     }//VerificarCodigoNaLista
 
-    public static int verificarPorTipo(int opcao) {
+    public static int verificarPorCategoria(int opcao) {
         int contador = 0;
         for (Veiculo veiculo : todosOsVeiculos) {
-            if (veiculo.getCategoria().equals(definirTipo(opcao))) {
+            if (veiculo.getCategoria().equals(definirCategoria(opcao))) {
                 contador++;
             }//If
         }//For
         return contador;
     }//VerificarPorTipo
 
-    public static String definirTipo(int opcao) {
-        String tipo = "";
+    public static String definirCategoria(int opcao) {
+        String categoria = "";
         switch (opcao) {
 
-            case 2 -> tipo = "Carro";
-            case 3 -> tipo = "Moto";
-            case 4 -> tipo = "Caminhao";
-            case 5 -> tipo = "Onibus";
+            case 2 -> categoria = "Carro";
+            case 3 -> categoria = "Moto";
+            case 4 -> categoria = "Caminhao";
 
         }//Switch
-        return tipo;
+        return categoria;
     }//DefinirTipo
 
     public static Veiculo getVeiculo(int codigo) {

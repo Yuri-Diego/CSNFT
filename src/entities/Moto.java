@@ -23,10 +23,20 @@ public class Moto extends Veiculo {
 		this.cilindradas = cilindradas;
 	}
 
-	
 	@Override
-    public String toString() {
-        return super.toString();
-    }//toString
+	public String toString() {
+		return nome +
+				" (cod.: " +
+				codigo +
+				" | estoque: " +
+				estoque +
+				" | atributos: " +
+				cilindradas +
+				" | custo de compra: " +
+				custo +
+				" | valor de venda: " +
+				valorDeVenda +
+				")";
+	}//toString
 
-}
+}//Class

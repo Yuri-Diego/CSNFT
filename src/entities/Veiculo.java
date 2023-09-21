@@ -2,16 +2,17 @@ package entities;
 
 
 public class Veiculo {
-	private String categoria;
-    private String marca;
-    private String modelo;
-    private String cor;
-    private int ano;
-    private static int codigo;
-    private int estoque;
-    private String nome;
-    private double custo;
-    private double valorDeVenda;
+	protected static int contador = 1;
+	protected String categoria;
+    protected String marca;
+    protected String modelo;
+    protected String cor;
+    protected int ano;
+    protected static int codigo;
+    protected int estoque;
+    protected String nome;
+    protected double custo;
+    protected double valorDeVenda;
 
     
     //Construtor sem estoque
@@ -24,6 +25,8 @@ public class Veiculo {
         this.custo = custo;
         this.valorDeVenda = valorDeVenda;
         this.nome = marca + " " + modelo + " " + cor + " " + ano;
+		codigo = contador;
+		contador++;
     }//Construtor sem estoque
 
     
@@ -38,6 +41,8 @@ public class Veiculo {
         this.valorDeVenda = valorDeVenda;
         this.estoque = estoque;
         this.nome = marca + " " + modelo + " " + cor + " " + ano;
+		codigo = contador;
+		contador++;
     }//Construtor com estoque
     
 
@@ -136,19 +141,19 @@ public class Veiculo {
 	}
 
 	@Override
-    public String toString() {
-        return nome +
-                " (cod.: " +
-                codigo +
-                " | estoque: " +
-                estoque +
-                " | categoria: " +
-                categoria +
-                " | custo de compra: " +
-                custo + 
-                " | valor de venda: " +
-                valorDeVenda + 
-                ")";
-    }//toString
+	public String toString() {
+		return nome +
+				" (cod.: " +
+				codigo +
+				" | estoque: " +
+				estoque +
+				" | categoria: " +
+				categoria +
+				" | custo de compra: " +
+				custo +
+				" | valor de venda: " +
+				valorDeVenda +
+				")";
+	}//toString
 
 }//Class
