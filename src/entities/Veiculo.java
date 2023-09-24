@@ -4,47 +4,52 @@ package entities;
 public class Veiculo {
 	protected static int contador = 1;
 	protected static int codigo;
+
 	protected String categoria;
     protected String marca;
     protected String modelo;
     protected String cor;
-    protected int ano;
-    protected int estoque;
-    protected String nome;
-    protected double custo;
+	protected String nome;
+	protected int estoque;
+	protected int ano;
+	protected double valorDeCompra;
     protected double valorDeVenda;
 
 
     //Construtor sem estoque
-    public Veiculo(String categoria, String marca, String modelo, String cor, int ano, double custo, double valorDeVenda) {
-    	this.categoria = categoria;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.cor = cor;
-        this.ano = ano;
-        this.custo = custo;
-        this.valorDeVenda = valorDeVenda;
-        this.nome = marca + " " + modelo + " " + cor + " " + ano;
+	public Veiculo(String categoria, String marca, String modelo, String cor,
+				   int ano, double valorDeCompra, double valorDeVenda) {
+
+		this.categoria = categoria;
+		this.marca = marca;
+		this.modelo = modelo;
+		this.cor = cor;
+		this.ano = ano;
+		this.valorDeCompra = valorDeCompra;
+		this.valorDeVenda = valorDeVenda;
+
+		nome = marca + " " + modelo + " " + cor + " " + ano;
 		codigo = contador;
 		contador++;
-    }//Construtor sem estoque
-
+	}//Construtor sem estoque
 
     //Construtor com estoque
-    public Veiculo(String categoria, String marca, String modelo, String cor, int ano, double custo, double valorDeVenda, int estoque) {
-    	this.categoria = categoria;
-    	this.marca = marca;
-        this.modelo = modelo;
-        this.cor = cor;
-        this.ano = ano;
-        this.custo = custo;
-        this.valorDeVenda = valorDeVenda;
-        this.estoque = estoque;
-        this.nome = marca + " " + modelo + " " + cor + " " + ano;
+	public Veiculo(String categoria, String marca, String modelo, String cor,
+				   int estoque, int ano, double valorDeCompra, double valorDeVenda) {
+
+		this.categoria = categoria;
+		this.marca = marca;
+		this.modelo = modelo;
+		this.cor = cor;
+		this.estoque = estoque;
+		this.ano = ano;
+		this.valorDeCompra = valorDeCompra;
+		this.valorDeVenda = valorDeVenda;
+
+		nome = marca + " " + modelo + " " + cor + " " + ano;
 		codigo = contador;
 		contador++;
-    }//Construtor com estoque
-
+	}//Construtor com estoque
 
 
 	public String getCategoria() {
@@ -102,19 +107,21 @@ public class Veiculo {
 	}
 
 
-	public boolean addEstoque(int quantidade) {
+	public void addEstoque(int quantidade) {
 		if (quantidade >= 0) {
 			estoque += quantidade;
 
-			return true;
+		} else {
+			System.out.println("Não pode adicionar quantidade negativa!");
 		}
-		return false;
 	}
 
 
 
 	public void remEstoque(int valor) {
-		this.estoque -= valor;
+		if (valor >= 0) {
+			this.estoque -= valor;
+		}
 	}
 
 
@@ -127,13 +134,13 @@ public class Veiculo {
 		this.nome = nome;
 	}
 
-	public double getCusto() {
-		return custo;
+	public double getValorDeCompra() {
+		return valorDeCompra;
 	}
 
 
-	public void setCusto(double custo) {
-		this.custo = custo;
+	public void setValorDeCompra(double valorDeCompra) {
+		this.valorDeCompra = valorDeCompra;
 	}
 
 
@@ -156,7 +163,7 @@ public class Veiculo {
 				" | categoria: " +
 				categoria +
 				" | custo de compra: " +
-				custo +
+				valorDeCompra +
 				" | valor de venda: " +
 				valorDeVenda +
 				")";

@@ -10,8 +10,8 @@ public class Moto extends Veiculo {
 		}//Construtor sem estoque
 		
 		//Construtor com estoque
-		public Moto(String categoria, String marca, String modelo, String cor, int ano, double custo, double valorDeVenda, int estoque, int cilindradas) {
-			super(categoria, marca, modelo, cor, ano, custo, valorDeVenda, estoque);
+		public Moto(String categoria, String marca, String modelo, String cor, int estoque, int ano, double custo, double valorDeVenda, int cilindradas) {
+			super(categoria, marca, modelo, cor, estoque, ano, custo, valorDeVenda);
 			this.cilindradas = cilindradas;
 		}//Construtor com estoque
 	
@@ -33,7 +33,7 @@ public class Moto extends Veiculo {
 				" | atributos: " +
 				cilindradas +
 				" | custo de compra: " +
-				custo +
+				valorDeCompra +
 				" | valor de venda: " +
 				valorDeVenda +
 				")";

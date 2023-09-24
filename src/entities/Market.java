@@ -5,9 +5,13 @@ import java.util.List;
 
 public class Market {
 
-    public static List<Veiculo> todosOsVeiculos = new ArrayList<>();
+    protected static List<Veiculo> todosOsVeiculos = new ArrayList<>();
 
     private static double saldo = 50000;
+
+    public static List<Veiculo> getTodosOsVeiculos() {
+        return todosOsVeiculos;
+    }
 
     public static double getSaldo() {
         return saldo;
@@ -29,18 +33,20 @@ public class Market {
     }//ListarTodos
 
     public static void listarPorCategoria(int opcao) {
+        String categoria = definirCategoria(opcao);
+
+        //Verifica se a quantidade é igual a 0
         int quantidade = 0;
         for (Veiculo veiculo : todosOsVeiculos) {
-            if (veiculo.getCategoria().equals(definirCategoria(opcao))) {
+            if (veiculo.getCategoria().equals(categoria)) {
                 quantidade++;
             }
         }
-
+        //Executa a listagem
         if (quantidade == 0) {
-            System.out.println("Não existe nenhum cadastro de " + definirCategoria(opcao));
+            System.out.println("Não existe nenhum cadastro de " + categoria);
 
         } else {
-            String categoria = definirCategoria(opcao);
 
             for (Veiculo veiculo : todosOsVeiculos) {
                 if (veiculo.getCategoria().equals(categoria) ) {
@@ -53,13 +59,20 @@ public class Market {
    
     public static void cadastrar(Veiculo veiculo) {
         todosOsVeiculos.add(veiculo);
+        saldo -= veiculo.estoque * veiculo.valorDeCompra;
     }//Cadastrar
 
     public static void adicionar(int codigo, int quantidade) {
     	for (Veiculo veiculo : todosOsVeiculos) {
-            if (codigo == veiculo.getCodigo()) {
-            	veiculo.addEstoque(quantidade);
-            }//If
+            if (quantidade * veiculo.valorDeCompra > saldo) {
+                System.out.println("Saldo insuficiente!");
+            } else {
+                if (codigo == veiculo.getCodigo()) {
+                    veiculo.addEstoque(quantidade);
+
+                    saldo -= quantidade * veiculo.valorDeCompra;
+                }//If
+            }
     	}//For
     }//Adicionar
 
@@ -75,9 +88,9 @@ public class Market {
     public static void vender(int codigo, int quantidade) {
     	for (Veiculo veiculo : todosOsVeiculos) {
             if (verificarCodigoNaLista(codigo) && veiculo.getCodigo() == codigo) {
-            	if (quantidade <= veiculo.getEstoque()) {
-            		veiculo.remEstoque(quantidade);
-            	}
+                veiculo.remEstoque(quantidade);
+
+                saldo += quantidade * veiculo.valorDeVenda;
             }//If
     	}//For
     }//Vender

@@ -63,70 +63,67 @@ public class Main {
 
                         String categoria = Market.definirCategoria(opcaoCadastro + 1);
 
-                        System.out.print("Digite o custo de compra: ");
-                        double custo = sc.nextDouble();
-                        System.out.print("Digite o valor da venda: ");
-                        double valorDeVenda = sc.nextDouble();
-                        sc.nextLine();
+                        System.out.print("Digite o valor de compra: ");
+                        double valorDeCompra = sc.nextDouble();
 
-                        Veiculo veiculo = new Veiculo(categoria, marca, modelo, cor, ano, custo, valorDeVenda);
-
-                        switch (opcaoCadastro) {
-
-                            case 1:
-
-                                System.out.print("Digite o cambio: ");
-                                String cambio = sc.nextLine();
-                                System.out.print("Digite a potência do motor: ");
-                                double motor = sc.nextDouble();
-
-                                veiculo = new Carro(categoria, marca, modelo, cor, ano, custo, valorDeVenda, cambio, motor);
-                                break;
-                            case 2:
-
-                                System.out.print("Digite a cinlindrada: ");
-                                int cilindrada = sc.nextInt();
-
-                                veiculo = new Moto(categoria, marca, modelo, cor, ano, custo, valorDeVenda, cilindrada);
-                                break;
-                            case 3:
-
-                                System.out.print("Digite o tipo: ");
-                                String tipo = sc.nextLine();
-
-                                veiculo = new Caminhao(categoria, marca, modelo, cor, ano, custo, valorDeVenda, tipo);
-                                break;
+                        if (valorDeCompra <= Market.getSaldo()) {
+                            System.out.print("Digite o valor da venda: ");
+                            double valorDeVenda = sc.nextDouble();
+                            sc.nextLine();
 
 
-                            default:
-                        }//Switch
-                        Market.cadastrar(veiculo);
-                        System.out.println(veiculo.getNome() + "Cadastrado com sucesso!");
+                            Veiculo veiculo = new Veiculo(categoria, marca, modelo, cor, ano, valorDeCompra, valorDeVenda);
 
-                        System.out.println("Deseja adicionar um estoque ? (s/n)");
-                        char escolha = sc.next().charAt(0);
+                            switch (opcaoCadastro) {
 
-                        if (escolha == 'n') {
+                                case 1:
 
+                                    System.out.print("Digite o cambio: ");
+                                    String cambio = sc.nextLine();
+                                    System.out.print("Digite a potência do motor: ");
+                                    double motor = sc.nextDouble();
+
+                                    veiculo = new Carro(categoria, marca, modelo, cor, ano, valorDeCompra, valorDeVenda, cambio, motor);
+                                    break;
+                                case 2:
+
+                                    System.out.print("Digite a cinlindrada: ");
+                                    int cilindrada = sc.nextInt();
+
+                                    veiculo = new Moto(categoria, marca, modelo, cor, ano, valorDeCompra, valorDeVenda, cilindrada);
+                                    break;
+                                case 3:
+
+                                    System.out.print("Digite o tipo: ");
+                                    String tipo = sc.nextLine();
+
+                                    veiculo = new Caminhao(categoria, marca, modelo, cor, ano, valorDeCompra, valorDeVenda, tipo);
+                                    break;
+
+                                default:
+
+                            }//Switch
+                            Market.cadastrar(veiculo);
+                            System.out.println(veiculo.getNome() + " Cadastrado com sucesso!");
+
+                            System.out.println("\n" + "Deseja adicionar um estoque ? (s/n)");
+                            char escolha = sc.next().charAt(0);
+
+                            System.out.print(escolha == 's' ? "Digite a quantidade que deseja adicionar ao estoque: " : "");
+                            Market.adicionar(veiculo.getCodigo(), escolha == 's' ? sc.nextInt() : 0);
+
+
+                            break;
                         } else {
-                            System.out.print("Digite a quantidade que deseja adicionar ao estoque: ");
-                            int quantidade = sc.nextInt();
-
-                            if (quantidade < 0) {
-                                System.out.println("Não pode adicionar quantidade negativa!");
-                            } else {
-                                System.out.println("");
-                            }
+                            System.out.println("Saldo insuficiente!");
                         }
-
-                        break;
                     } else {
                         System.out.println("Opção inválida!");
                     }
                     break;
 
                 case 3: // Adicionar
-                    if (Market.todosOsVeiculos.size() == 0) {
+                    if (Market.getTodosOsVeiculos().size() == 0) {
                         System.out.println("Não existe veículo cadastrado no sistema!");
                         break;
                     }
@@ -138,9 +135,12 @@ public class Main {
                         System.out.print("Digite a quantidade quer adicionar: ");
                         int quantidade = sc.nextInt();
 
-                        Market.adicionar(codigo, quantidade);
-                        System.out.println("\n" + Market.getVeiculo(codigo).getNome() + " | " + quantidade + " unidades adicionadas com sucesso!");
-
+                        if (quantidade * Market.getVeiculo(codigo).getValorDeCompra() <= Market.getSaldo()) {
+                            Market.adicionar(codigo, quantidade);
+                            System.out.println("\n" + Market.getVeiculo(codigo).getNome() + " | " + quantidade + " unidades adicionadas com sucesso!");
+                        } else {
+                            System.out.println("Saldo insulficiente!");
+                        }
                     } else {
                         System.out.println("\nNão existe veículo com este código!");
                     }//Else
@@ -148,14 +148,14 @@ public class Main {
                     break;
 
                 case 4: // Remover
-                    if (Market.todosOsVeiculos.size() == 0) {
+                    if (Market.getTodosOsVeiculos().size() == 0) {
                         System.out.println("Não existe veículo cadastrado no sistema!");
 
                     } else {
                         System.out.print("Digite o código do veículo que deseja remover: ");
                         codigo = sc.nextInt();
 
-                        for (Veiculo i : Market.todosOsVeiculos) {
+                        for (Veiculo i : Market.getTodosOsVeiculos()) {
                             if (Market.verificarCodigoNaLista(codigo) && i.getEstoque() == 0) {
                                 if (i.getCodigo() != codigo) {
                                     continue;
@@ -188,7 +188,7 @@ public class Main {
                     break;
                 case 5: // Vender
 
-                    if (Market.todosOsVeiculos.size() == 0) {
+                    if (Market.getTodosOsVeiculos().size() == 0) {
                         System.out.println("Não existe veículo cadastrado no sistema!");
                         break;
                     }

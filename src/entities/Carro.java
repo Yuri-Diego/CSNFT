@@ -14,8 +14,8 @@ public class Carro extends Veiculo {
 	
 	
 	//Construtor com estoque
-	public Carro(String categoria, String marca, String modelo, String cor, int ano, double custo, double valorDeVenda, int estoque, String cambio, double motor) {
-		super(categoria,marca, modelo, cor, ano, custo, valorDeVenda, estoque);
+	public Carro(String categoria, String marca, String modelo, String cor, int estoque, int ano, double custo, double valorDeVenda, String cambio, double motor) {
+		super(categoria, marca, modelo, cor, estoque, ano, custo, valorDeVenda);
 		this.cambio = cambio;
 		this.motor = motor;
 	}//Construtor com estoque
@@ -46,7 +46,7 @@ public class Carro extends Veiculo {
 				" | atributos: " +
 				cambio + " " + motor +
 				" | custo de compra: " +
-				custo +
+				valorDeCompra +
 				" | valor de venda: " +
 				valorDeVenda +
 				")";

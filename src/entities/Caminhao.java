@@ -5,15 +5,19 @@ public class Caminhao extends Veiculo {
 	
 	
 	//Construtor sem estoque
-	public Caminhao(String categoria, String marca, String modelo, String cor, int ano, double custo, double valorDeVenda, String tipo) {
+	public Caminhao(String categoria, String marca, String modelo, String cor,
+					int ano, double custo, double valorDeVenda, String tipo) {
+
 		super(categoria, marca, modelo, cor, ano, custo, valorDeVenda);
 		this.tipo = tipo;
 	}//Construtor sem estoque
 
 	
 	//Construtor com estoque
-	public Caminhao(String categoria, String marca, String modelo, String cor, int ano, double custo, double valorDeVenda, int estoque, String tipo) {
-		super(categoria, marca, modelo, cor, ano, custo, valorDeVenda, estoque);
+	public Caminhao(String categoria, String marca, String modelo, String cor,
+					int estoque, int ano, double custo, double valorDeVenda, String tipo) {
+
+		super(categoria, marca, modelo, cor, estoque, ano, custo, valorDeVenda);
 		this.tipo = tipo;
 	}//Construtor com estoque
 	
@@ -36,7 +40,7 @@ public class Caminhao extends Veiculo {
 				" | atributos: " +
 				tipo +
 				" | custo de compra: " +
-				custo +
+				valorDeCompra +
 				" | valor de venda: " +
 				valorDeVenda +
 				")";
