@@ -10,6 +10,7 @@ public class Caminhao extends Veiculo {
 
 		super(categoria, marca, modelo, cor, ano, custo, valorDeVenda);
 		this.tipo = tipo;
+		contador--;
 	}//Construtor sem estoque
 
 	
@@ -19,6 +20,7 @@ public class Caminhao extends Veiculo {
 
 		super(categoria, marca, modelo, cor, estoque, ano, custo, valorDeVenda);
 		this.tipo = tipo;
+		contador--;
 	}//Construtor com estoque
 	
 	

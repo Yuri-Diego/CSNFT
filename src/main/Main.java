@@ -104,14 +104,19 @@ public class Main {
 
                             }//Switch
                             Market.cadastrar(veiculo);
-                            System.out.println(veiculo.getNome() + " Cadastrado com sucesso!");
+                            System.out.println("\n" + veiculo.getNome() + " Cadastrado com sucesso!");
 
                             System.out.println("\n" + "Deseja adicionar um estoque ? (s/n)");
                             char escolha = sc.next().charAt(0);
 
-                            System.out.print(escolha == 's' ? "Digite a quantidade que deseja adicionar ao estoque: " : "");
-                            Market.adicionar(veiculo.getCodigo(), escolha == 's' ? sc.nextInt() : 0);
-
+                            if (escolha == 's') {
+                                System.out.print("Digite a quantidade que deseja adicionar ao estoque: ");
+                                int quantidade = sc.nextInt();
+                                Market.adicionar(veiculo.getCodigo(), quantidade);
+                                if (quantidade >= 0) {
+                                    System.out.println("\n" + Market.getVeiculo(veiculo.getCodigo()).getNome() + " | " + quantidade + " unidades adicionadas com sucesso!");
+                                }
+                            }
 
                             break;
                         } else {

@@ -3,7 +3,7 @@ package entities;
 
 public class Veiculo {
 	protected static int contador = 1;
-	protected static int codigo;
+	protected int codigo;
 
 	protected String categoria;
     protected String marca;
@@ -30,7 +30,6 @@ public class Veiculo {
 
 		nome = marca + " " + modelo + " " + cor + " " + ano;
 		codigo = contador;
-		contador++;
 	}//Construtor sem estoque
 
     //Construtor com estoque
@@ -48,7 +47,6 @@ public class Veiculo {
 
 		nome = marca + " " + modelo + " " + cor + " " + ano;
 		codigo = contador;
-		contador++;
 	}//Construtor com estoque
 
 

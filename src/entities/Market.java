@@ -65,7 +65,7 @@ public class Market {
     public static void adicionar(int codigo, int quantidade) {
     	for (Veiculo veiculo : todosOsVeiculos) {
             if (quantidade * veiculo.valorDeCompra > saldo) {
-                System.out.println("Saldo insuficiente!");
+                System.out.println("\nSaldo insuficiente!");
             } else {
                 if (codigo == veiculo.getCodigo()) {
                     veiculo.addEstoque(quantidade);

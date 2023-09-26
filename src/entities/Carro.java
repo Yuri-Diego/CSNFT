@@ -10,6 +10,7 @@ public class Carro extends Veiculo {
 		super(categoria, marca, modelo, cor, ano, custo, valorDeVenda);
 		this.cambio = cambio;
 		this.motor = motor;
+		contador++;
 	}//Construtor sem estoque
 	
 	
@@ -18,6 +19,7 @@ public class Carro extends Veiculo {
 		super(categoria, marca, modelo, cor, estoque, ano, custo, valorDeVenda);
 		this.cambio = cambio;
 		this.motor = motor;
+		contador++;
 	}//Construtor com estoque
 	
 	
