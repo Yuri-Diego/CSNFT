@@ -1,0 +1,2 @@
+Carro,renault,sandero,prata,2013,0,1.0,10.0
+Moto,yamaha,fz25,azul,2022,0,1.0,10.0

@@ -41,4 +41,8 @@ public class Moto extends Veiculo {
 				")";
 	}//toString
 
+	@Override
+	public String toStringArquivo() {
+		return super.toStringArquivo() + "," + cilindradas;
+	}
 }//Class

@@ -1,11 +1,15 @@
 package entities;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Market {
 
-    protected static List<Veiculo> todosOsVeiculos = new ArrayList<>();
+    protected static ArrayList<Veiculo> todosOsVeiculos = new ArrayList<>();
 
     private static double saldo = 50000;
 
@@ -22,6 +26,7 @@ public class Market {
     }
 
     public static void listarTodos() {
+        todosOsVeiculos = obterArquivo();
         if (todosOsVeiculos.size() == 0) {
             System.out.println("Nenhum veículo cadastrado no sistema.");
 
@@ -60,6 +65,7 @@ public class Market {
     public static void cadastrar(Veiculo veiculo) {
         todosOsVeiculos.add(veiculo);
         saldo -= veiculo.estoque * veiculo.valorDeCompra;
+        escreverArquivo(todosOsVeiculos);
     }//Cadastrar
 
     public static void adicionar(int codigo, int quantidade) {
@@ -125,17 +131,45 @@ public class Market {
         return null;
     }//getVeiculo
 
+    public static void escreverArquivo(ArrayList<Veiculo> veiculos) {
+        try {
+            PrintWriter arquivo = new PrintWriter("C:\\teste\\CSNFT\\src\\arquivo.txt");
+
+            for (Veiculo a : veiculos) {
+                switch (a.categoria) {
+                    case "Carro" -> arquivo.write(a.toStringArquivo() + "\n");
+                    case "Moto" -> arquivo.write(a.toStringArquivo() + "\n");
+                    case "Caminhao" -> arquivo.write(a.toStringArquivo() + "\n");
+                    default -> arquivo.write(a.toStringArquivo() + "\n");
+                }
+            } arquivo.close();
+        } catch (FileNotFoundException e){
+            System.out.println("Arquivo não encontrado!");
+        }
+    }
+
+    public static ArrayList<Veiculo> obterArquivo() {
+        ArrayList<Veiculo> tempArray = new ArrayList<>();
+
+        File arquivo = new File("C:\\teste\\CSNFT\\src\\arquivo.txt");
+
+        try {
+            Scanner sc1 = new Scanner(arquivo);
+            while (sc1.hasNextLine()) {
+
+                String[] veiculoArray = sc1.nextLine().split(",");
+                Veiculo novoVeiculo = new Veiculo(veiculoArray[0], veiculoArray[1], veiculoArray[2], veiculoArray[3],
+                                                    Integer.parseInt(veiculoArray[4]), Integer.parseInt(veiculoArray[5]),
+                                                    Double.parseDouble(veiculoArray[6]), Double.parseDouble(veiculoArray[7]));
+
+                tempArray.add(novoVeiculo);
+
+            }//While
+            sc1.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo não encontrado!");
+        }
+        return tempArray;
+    }//ObterArquivo
+
 }//Class
-
-/*
-double custoFinal = custo * quantidade;
-
-		if (custoFinal > Market.getSaldo() || quantidade < 0) {
-			System.out.println("");
-		} else {
-			estoque += quantidade;
-
-			double saldo = Market.getSaldo() - custoFinal;
-			Market.setSaldo(saldo);
-		}
- */

@@ -1,0 +1,1 @@
+Carro,Renault,Sandero,Prata,02013,50.0,100.0Carro,Renaultttt,Sandero,Prata,02022,50.0,100.0Moto,yamaha,fz25,preta,20220,50.0,100.0

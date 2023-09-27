@@ -10,13 +10,14 @@ public class Veiculo {
     protected String modelo;
     protected String cor;
 	protected String nome;
-	protected int estoque;
 	protected int ano;
+	protected int estoque;
 	protected double valorDeCompra;
     protected double valorDeVenda;
 
 
-    //Construtor sem estoque
+
+	//Construtor sem estoque
 	public Veiculo(String categoria, String marca, String modelo, String cor,
 				   int ano, double valorDeCompra, double valorDeVenda) {
 
@@ -34,14 +35,14 @@ public class Veiculo {
 
     //Construtor com estoque
 	public Veiculo(String categoria, String marca, String modelo, String cor,
-				   int estoque, int ano, double valorDeCompra, double valorDeVenda) {
+				   int ano, int estoque, double valorDeCompra, double valorDeVenda) {
 
 		this.categoria = categoria;
 		this.marca = marca;
 		this.modelo = modelo;
 		this.cor = cor;
-		this.estoque = estoque;
 		this.ano = ano;
+		this.estoque = estoque;
 		this.valorDeCompra = valorDeCompra;
 		this.valorDeVenda = valorDeVenda;
 
@@ -167,5 +168,8 @@ public class Veiculo {
 				")";
 	}//toString
 
+	public String toStringArquivo() {
+		return codigo + " | " + categoria + "," + nome.replace(" ", ",") + "," + estoque + "," + valorDeCompra + "," + valorDeVenda;
+	}
 }//Class
 

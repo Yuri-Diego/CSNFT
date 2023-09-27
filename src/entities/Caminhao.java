@@ -48,4 +48,8 @@ public class Caminhao extends Veiculo {
 				")";
 	}//toString
 
+	@Override
+	public String toStringArquivo() {
+		return super.toStringArquivo() + "," + tipo;
+	}
 }//Class

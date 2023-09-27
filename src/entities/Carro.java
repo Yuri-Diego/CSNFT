@@ -3,8 +3,9 @@ package entities;
 public class Carro extends Veiculo {
 	private String cambio;
 	private double motor;
-	
-	
+
+
+
 	//Construtor sem estoque
 	public Carro(String categoria, String marca, String modelo, String cor, int ano, double custo, double valorDeVenda, String cambio, double motor) {
 		super(categoria, marca, modelo, cor, ano, custo, valorDeVenda);
@@ -53,6 +54,9 @@ public class Carro extends Veiculo {
 				valorDeVenda +
 				")";
 	}//toString
-	
 
+	@Override
+	public String toStringArquivo() {
+		return super.toStringArquivo() + "," + cambio + "," + motor;
+	}
 }
