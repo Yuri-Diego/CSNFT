@@ -133,7 +133,7 @@ public class Market {
 
     public static void escreverArquivo(ArrayList<Veiculo> veiculos) {
         try {
-            PrintWriter arquivo = new PrintWriter("C:\\teste\\CSNFT\\src\\arquivo.txt");
+            PrintWriter arquivo = new PrintWriter("src\\arquivo.txt");
 
             for (Veiculo a : veiculos) {
                 switch (a.categoria) {
@@ -151,7 +151,7 @@ public class Market {
     public static ArrayList<Veiculo> obterArquivo() {
         ArrayList<Veiculo> tempArray = new ArrayList<>();
 
-        File arquivo = new File("C:\\teste\\CSNFT\\src\\arquivo.txt");
+        File arquivo = new File("src\\arquivo.txt");
 
         try {
             Scanner sc1 = new Scanner(arquivo);
