@@ -1,3 +1,0 @@
-0 | Moto,Honda,Fan,Preta,2023,2,120.0,20000.0,160
-1 | Carro,aasda,asdas,sad,2002,2,123.0,12141.0,ahduiq,123.0
-2 | Caminhao,asdasd,dasd,dsadas,2000,0,1213.0,45120.0,bipartido

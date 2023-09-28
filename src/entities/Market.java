@@ -26,13 +26,12 @@ public class Market {
     }
 
     public static void listarTodos() {
-//        todosOsVeiculos = obterArquivo();
         if (todosOsVeiculos.size() == 0) {
             System.out.println("Nenhum veículo cadastrado no sistema.");
 
         } else {
             for (Veiculo veiculo : todosOsVeiculos) {
-                System.out.println(veiculo);
+                System.out.println(veiculo.toString());
             }//For
         }//Else
     }//ListarTodos
@@ -133,7 +132,7 @@ public class Market {
 
     public static void escreverArquivo(ArrayList<Veiculo> veiculos) {
         try {
-            PrintWriter arquivo = new PrintWriter("src\\arquivo.txt");
+            PrintWriter arquivo = new PrintWriter("src\\arquivos\\todosOsVeiculos.txt");
 
             for (Veiculo a : veiculos) {
                 switch (a.categoria) {
@@ -151,17 +150,37 @@ public class Market {
     public static ArrayList<Veiculo> obterArquivo() {
         ArrayList<Veiculo> tempArray = new ArrayList<>();
 
-        File arquivo = new File("src\\arquivo.txt");
+        File arquivo = new File("src\\arquivos\\todosOsVeiculos.txt");
 
         try {
             Scanner sc1 = new Scanner(arquivo);
             while (sc1.hasNextLine()) {
 
                 String[] veiculoArray = sc1.nextLine().split(",");
-                Veiculo novoVeiculo = new Veiculo(veiculoArray[0], veiculoArray[1], veiculoArray[2], veiculoArray[3],
-                                                    Integer.parseInt(veiculoArray[4]), Integer.parseInt(veiculoArray[5]),
-                                                    Double.parseDouble(veiculoArray[6]), Double.parseDouble(veiculoArray[7]));
-
+                Veiculo novoVeiculo = new Veiculo(veiculoArray[1], veiculoArray[2], veiculoArray[3], veiculoArray[4],
+                        Integer.parseInt(veiculoArray[5]), Integer.parseInt(veiculoArray[6]),
+                        Double.parseDouble(veiculoArray[7]), Double.parseDouble(veiculoArray[8]));
+                switch (veiculoArray[1]) {
+                    case "Carro":
+                        novoVeiculo = new Carro(veiculoArray[1], veiculoArray[2], veiculoArray[3], veiculoArray[4],
+                                                Integer.parseInt(veiculoArray[5]), Integer.parseInt(veiculoArray[6]),
+                                                Double.parseDouble(veiculoArray[7]), Double.parseDouble(veiculoArray[8]),
+                                                veiculoArray[9], Double.parseDouble(veiculoArray[10]));
+                        break;
+                    case "Moto":
+                        novoVeiculo = new Moto(veiculoArray[1], veiculoArray[2], veiculoArray[3], veiculoArray[4],
+                                                Integer.parseInt(veiculoArray[5]), Integer.parseInt(veiculoArray[6]),
+                                                Double.parseDouble(veiculoArray[7]), Double.parseDouble(veiculoArray[8]),
+                                                Integer.parseInt(veiculoArray[9]));
+                        break;
+                    case "Caminhao":
+                        novoVeiculo = new Caminhao(veiculoArray[1], veiculoArray[2], veiculoArray[3], veiculoArray[4],
+                                                Integer.parseInt(veiculoArray[5]), Integer.parseInt(veiculoArray[6]),
+                                                Double.parseDouble(veiculoArray[7]), Double.parseDouble(veiculoArray[8]),
+                                                veiculoArray[9]);
+                        break;
+                    default:
+                }
                 tempArray.add(novoVeiculo);
             }//While
             sc1.close();

@@ -32,7 +32,7 @@ public class Main {
 
             switch (opcao) {
                 case 1: // Listar
-                    System.out.println("                      ~~~~~~[  LISTAR  ]~~~~~~");
+                    System.out.println("              ~~~~~~[  LISTAR  ]~~~~~~");
                     System.out.println("[ 1 ]-Todos  [ 2 ]-Carro  [ 3 ]-Moto  [ 4 ]-Caminhao");
                     System.out.print(" ↪ ");
                     opcao = sc.nextInt();
