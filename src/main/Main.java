@@ -15,6 +15,9 @@ public class Main {
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
+        
+        //Inicializar Banco de dados
+        Market.todosOsVeiculos = Market.obterArquivo();
 
         int opcao = 1;
         System.out.println("\n                    🏍🚗🚚🚌 [ BEM-VINDO AO CARS SALE NFT ] 🏍🚗🚚🚌");
@@ -114,7 +117,7 @@ public class Main {
                                 int quantidade = sc.nextInt();
                                 Market.adicionar(veiculo.getCodigo(), quantidade);
                                 if (quantidade >= 0) {
-                                    System.out.println("\n" + Market.getVeiculo(veiculo.getCodigo()).getNome() + " | " + quantidade + " unidades adicionadas com sucesso!");
+                                    System.out.println("\n" + veiculo.getNome() + " | " + quantidade + " unidades adicionadas com sucesso!");
                                 }
                             }
 

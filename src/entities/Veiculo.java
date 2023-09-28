@@ -2,8 +2,8 @@ package entities;
 
 
 public class Veiculo {
-	protected static int contador = 1;
-	protected int codigo;
+	protected static int contador;
+	protected int codigo = contador;
 
 	protected String categoria;
     protected String marca;
@@ -30,7 +30,6 @@ public class Veiculo {
 		this.valorDeVenda = valorDeVenda;
 
 		nome = marca + " " + modelo + " " + cor + " " + ano;
-		codigo = contador;
 	}//Construtor sem estoque
 
     //Construtor com estoque
@@ -47,7 +46,6 @@ public class Veiculo {
 		this.valorDeVenda = valorDeVenda;
 
 		nome = marca + " " + modelo + " " + cor + " " + ano;
-		codigo = contador;
 	}//Construtor com estoque
 
 

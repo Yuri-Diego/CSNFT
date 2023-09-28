@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Market {
 
-    protected static ArrayList<Veiculo> todosOsVeiculos = new ArrayList<>();
+    public static ArrayList<Veiculo> todosOsVeiculos = new ArrayList<>();
 
     private static double saldo = 50000;
 
@@ -26,7 +26,7 @@ public class Market {
     }
 
     public static void listarTodos() {
-        todosOsVeiculos = obterArquivo();
+//        todosOsVeiculos = obterArquivo();
         if (todosOsVeiculos.size() == 0) {
             System.out.println("Nenhum veículo cadastrado no sistema.");
 
@@ -163,7 +163,6 @@ public class Market {
                                                     Double.parseDouble(veiculoArray[6]), Double.parseDouble(veiculoArray[7]));
 
                 tempArray.add(novoVeiculo);
-
             }//While
             sc1.close();
         } catch (FileNotFoundException e) {
