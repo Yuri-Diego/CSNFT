@@ -31,7 +31,7 @@ public class Market {
 
         } else {
             for (Veiculo veiculo : todosOsVeiculos) {
-                System.out.println(veiculo.toString());
+                System.out.println(veiculo.toStringSuper());
             }//For
         }//Else
     }//ListarTodos
@@ -76,6 +76,7 @@ public class Market {
                     veiculo.addEstoque(quantidade);
 
                     saldo -= quantidade * veiculo.valorDeCompra;
+                    escreverArquivo(todosOsVeiculos);
                 }//If
             }
     	}//For
@@ -85,6 +86,7 @@ public class Market {
         for (Veiculo veiculo : todosOsVeiculos) {
             if (codigo == veiculo.getCodigo()) {
                 todosOsVeiculos.remove(veiculo);
+                escreverArquivo(todosOsVeiculos);
                 break;
             }//If
         }//For
@@ -96,6 +98,7 @@ public class Market {
                 veiculo.remEstoque(quantidade);
 
                 saldo += quantidade * veiculo.valorDeVenda;
+                escreverArquivo(todosOsVeiculos);
             }//If
     	}//For
     }//Vender

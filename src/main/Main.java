@@ -173,12 +173,13 @@ public class Main {
 
                                 break;
                             } else if (Market.verificarCodigoNaLista(codigo)){
-                                System.out.println("⚠⚠ Esta opção remove o veículo e todo o seu estoque ⚠⚠");
+                                System.out.println("\n⚠⚠ Esta opção remove o veículo e todo o seu estoque ⚠⚠");
+                                System.out.println(Market.getVeiculo(codigo));
                                 System.out.print("Deseja realmente remover este produto ? (s/n): ");
                                 char response = sc.next().charAt(0);
 
                                 if (response == 's') {
-                                    System.out.println("\n" + Market.getVeiculo(codigo) + " | Removido com sucesso!");
+                                    System.out.println("\n" +  "Removido com sucesso!");
                                     Market.remover(codigo);
                                     break;
 

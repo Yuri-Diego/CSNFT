@@ -152,8 +152,8 @@ public class Veiculo {
 		this.valorDeVenda = valorDeVenda;
 	}
 
-	@Override
-	public String toString() {
+	
+	public String toStringSuper() {
 		return nome +
 				" (cod.: " +
 				codigo +
