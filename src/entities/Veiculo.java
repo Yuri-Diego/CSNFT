@@ -15,7 +15,9 @@ public class Veiculo {
 	protected double valorDeCompra;
     protected double valorDeVenda;
 
-
+	public Veiculo() {
+		codigo = contador;
+	}
 
 	//Construtor sem estoque
 	public Veiculo(String categoria, String marca, String modelo, String cor,

@@ -1,3 +1,0 @@
-1,Carro,Renault,Sandero,prata,2013,9,50.0,100.0,manual,1.0
-2,Moto,Honda,Fan,preta,2023,1,50.0,100.0,160
-4,Moto,FAN,HONDA,PRATA,2022,3,100.0,10000.0,160

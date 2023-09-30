@@ -74,11 +74,9 @@ public class Main {
                             double valorDeVenda = sc.nextDouble();
                             sc.nextLine();
 
-
-                            Veiculo veiculo = new Veiculo(categoria, marca, modelo, cor, ano, valorDeCompra, valorDeVenda);
+                            Veiculo veiculo = new Veiculo();
 
                             switch (opcaoCadastro) {
-
                                 case 1:
 
                                     System.out.print("Digite o cambio: ");
@@ -181,13 +179,13 @@ public class Main {
                                 if (response == 's') {
                                     System.out.println("\n" +  "Removido com sucesso!");
                                     Market.remover(codigo);
-                                    break;
 
                                 } else {
                                     System.out.println("\nVoltando ao menu...");
-                                    break;
 
-                                }//Else
+                                }
+                                break;
+
                             } else {
                                 System.out.println("\nNão existe veículo com este código!");
                                 break;

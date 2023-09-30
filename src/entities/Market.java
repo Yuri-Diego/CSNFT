@@ -138,13 +138,10 @@ public class Market {
             PrintWriter arquivo = new PrintWriter("src\\arquivos\\todosOsVeiculos.txt");
 
             for (Veiculo a : veiculos) {
-                switch (a.categoria) {
-                    case "Carro" -> arquivo.write(a.toStringArquivo() + "\n");
-                    case "Moto" -> arquivo.write(a.toStringArquivo() + "\n");
-                    case "Caminhao" -> arquivo.write(a.toStringArquivo() + "\n");
-                    default -> arquivo.write(a.toStringArquivo() + "\n");
-                }
+                arquivo.write(a.toStringArquivo() + "\n");
+
             } arquivo.close();
+
         } catch (FileNotFoundException e){
             System.out.println("Arquivo não encontrado!");
         }
@@ -160,9 +157,8 @@ public class Market {
             while (sc1.hasNextLine()) {
 
                 String[] veiculoArray = sc1.nextLine().split(",");
-                Veiculo novoVeiculo = new Veiculo(veiculoArray[1], veiculoArray[2], veiculoArray[3], veiculoArray[4],
-                        Integer.parseInt(veiculoArray[5]), Integer.parseInt(veiculoArray[6]),
-                        Double.parseDouble(veiculoArray[7]), Double.parseDouble(veiculoArray[8]));
+                Veiculo novoVeiculo = new Veiculo();
+
                 switch (veiculoArray[1]) {
                     case "Carro":
                         novoVeiculo = new Carro(veiculoArray[1], veiculoArray[2], veiculoArray[3], veiculoArray[4],
