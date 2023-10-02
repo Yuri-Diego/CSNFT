@@ -1,8 +1,8 @@
 package entities;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import arquivos.ArchivesMethods;
+
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,6 @@ import java.util.List;
 public class Market {
 
     public static ArrayList<Veiculo> todosOsVeiculos = new ArrayList<>();
-
     private static double saldo = 50000;
 
     public static List<Veiculo> getTodosOsVeiculos() {
@@ -64,7 +63,8 @@ public class Market {
     public static void cadastrar(Veiculo veiculo) {
         todosOsVeiculos.add(veiculo);
         saldo -= veiculo.estoque * veiculo.valorDeCompra;
-        escreverArquivo(todosOsVeiculos);
+        ArchivesMethods.escreverArquivo(todosOsVeiculos);
+        ArchivesMethods.escreverRelatorioDeCompras(todosOsVeiculos);
     }//Cadastrar
 
     public static void adicionar(int codigo, int quantidade) {
@@ -76,7 +76,8 @@ public class Market {
                     veiculo.addEstoque(quantidade);
 
                     saldo -= quantidade * veiculo.valorDeCompra;
-                    escreverArquivo(todosOsVeiculos);
+                    ArchivesMethods.escreverArquivo(todosOsVeiculos);
+                    ArchivesMethods.escreverRelatorioDeCompras(todosOsVeiculos);
                 }//If
             }
     	}//For
@@ -86,7 +87,7 @@ public class Market {
         for (Veiculo veiculo : todosOsVeiculos) {
             if (codigo == veiculo.getCodigo()) {
                 todosOsVeiculos.remove(veiculo);
-                escreverArquivo(todosOsVeiculos);
+                ArchivesMethods.escreverArquivo(todosOsVeiculos);
                 break;
             }//If
         }//For
@@ -98,11 +99,35 @@ public class Market {
                 veiculo.remEstoque(quantidade);
 
                 saldo += quantidade * veiculo.valorDeVenda;
-                escreverArquivo(todosOsVeiculos);
+                ArchivesMethods.escreverArquivo(todosOsVeiculos);
+                ArchivesMethods.escreverRelatorioDeVendas(todosOsVeiculos, quantidade);
             }//If
     	}//For
     }//Vender
 
+    public static void relatorio(int opcao) {
+        double totalGasto = 0.0;
+        switch (opcao) {
+            case 1:
+                System.out.println("RELATÓRIO DE COMPRAS:");
+                for (String a : ArchivesMethods.obterRelatorioDeCompras()) {
+                    String[] arrayString = a.split(",");
+
+                    System.out.println(arrayString[0] + ": " + arrayString[1] + " | Estoque: " + arrayString[2] + " | Custo: " +
+                                       arrayString[3]);
+
+                    totalGasto += Double.parseDouble(arrayString[4]);
+                }
+                System.out.println("Valor total gasto: " + totalGasto);
+
+                break;
+            case 2:
+
+                break;
+
+            default:
+        }
+    }
     public static boolean verificarCodigoNaLista(int codigo) {
         for (Veiculo veiculo : todosOsVeiculos) {
             if (codigo == veiculo.getCodigo() ) {
@@ -132,61 +157,5 @@ public class Market {
         }//For
         return null;
     }//getVeiculo
-
-    public static void escreverArquivo(ArrayList<Veiculo> veiculos) {
-        try {
-            PrintWriter arquivo = new PrintWriter("src\\arquivos\\todosOsVeiculos.txt");
-
-            for (Veiculo a : veiculos) {
-                arquivo.write(a.toStringArquivo() + "\n");
-
-            } arquivo.close();
-
-        } catch (FileNotFoundException e){
-            System.out.println("Arquivo não encontrado!");
-        }
-    }
-
-    public static ArrayList<Veiculo> obterArquivo() {
-        ArrayList<Veiculo> tempArray = new ArrayList<>();
-
-        File arquivo = new File("src\\arquivos\\todosOsVeiculos.txt");
-
-        try {
-            Scanner sc1 = new Scanner(arquivo);
-            while (sc1.hasNextLine()) {
-
-                String[] veiculoArray = sc1.nextLine().split(",");
-                Veiculo novoVeiculo = new Veiculo();
-
-                switch (veiculoArray[1]) {
-                    case "Carro":
-                        novoVeiculo = new Carro(veiculoArray[1], veiculoArray[2], veiculoArray[3], veiculoArray[4],
-                                                Integer.parseInt(veiculoArray[5]), Integer.parseInt(veiculoArray[6]),
-                                                Double.parseDouble(veiculoArray[7]), Double.parseDouble(veiculoArray[8]),
-                                                veiculoArray[9], Double.parseDouble(veiculoArray[10]));
-                        break;
-                    case "Moto":
-                        novoVeiculo = new Moto(veiculoArray[1], veiculoArray[2], veiculoArray[3], veiculoArray[4],
-                                                Integer.parseInt(veiculoArray[5]), Integer.parseInt(veiculoArray[6]),
-                                                Double.parseDouble(veiculoArray[7]), Double.parseDouble(veiculoArray[8]),
-                                                Integer.parseInt(veiculoArray[9]));
-                        break;
-                    case "Caminhao":
-                        novoVeiculo = new Caminhao(veiculoArray[1], veiculoArray[2], veiculoArray[3], veiculoArray[4],
-                                                Integer.parseInt(veiculoArray[5]), Integer.parseInt(veiculoArray[6]),
-                                                Double.parseDouble(veiculoArray[7]), Double.parseDouble(veiculoArray[8]),
-                                                veiculoArray[9]);
-                        break;
-                    default:
-                }
-                tempArray.add(novoVeiculo);
-            }//While
-            sc1.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo não encontrado!");
-        }
-        return tempArray;
-    }//ObterArquivo
 
 }//Class

@@ -6,8 +6,11 @@ package main;
 //João Vitor Pereira da Silva
 //Yuri Diego Almeida Silva dos Santos
 
+import arquivos.ArchivesMethods;
 import entities.*;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -17,15 +20,15 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         
         //Inicializar Banco de dados
-        Market.todosOsVeiculos = Market.obterArquivo();
+        Market.todosOsVeiculos = ArchivesMethods.obterArquivo();
 
         int opcao = 1;
         System.out.println("\n                    🏍🚗🚚🚌 [ BEM-VINDO AO CARS SALE NFT ] 🏍🚗🚚🚌");
-        while (opcao != 6) {
+        while (opcao != 7) {
         	
             System.out.println("\n");
-            System.out.println("                           ~~~~~~[  MENU PRINCIPAL  ]~~~~~~");
-            System.out.println("[ 1 ]-Listar  [ 2 ]-Cadastrar  [ 3 ]-Adicionar  [ 4 ]-Remover  [ 5 ]-Vender  [ 6 ]-Sair");
+            System.out.println("                                    ~~~~~~[  MENU PRINCIPAL  ]~~~~~~");
+            System.out.println("[ 1 ]-Listar  [ 2 ]-Cadastrar  [ 3 ]-Adicionar  [ 4 ]-Remover  [ 5 ]-Vender  [ 6 ]-Relatório  [ 7 ]-Sair");
             System.out.print(" ↪ ");
             opcao = sc.nextInt();
             System.out.println("\n");
@@ -219,7 +222,31 @@ public class Main {
                     }
                     break;
 
-                case 6: // Sair
+                case 6: // Relatório
+                    System.out.println("       ~~~~~~[  RELATÓRIO  ]~~~~~~");
+                    System.out.println("[ 1 ]-Todo o histórico  [ 2 ]-Sessão atual");
+                    System.out.print(" ↪ ");
+                    int opcaoRelatorio = sc.nextInt();
+                    System.out.print("\n");
+
+                    if (opcaoRelatorio > 0 && opcaoRelatorio < 3) {
+                        switch (opcaoRelatorio) {
+                            case 1:
+                                Market.relatorio(opcaoRelatorio);
+                                break;
+                            case 2:
+
+                                break;
+
+                            default:
+                        }
+                    } else {
+                        System.out.println("Opção inválida!");
+                    }
+
+                    break;
+
+                case 7: // Sair
                     System.out.println("Saindo...");
                     break;
 
