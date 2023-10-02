@@ -68,20 +68,19 @@ public class ArchivesMethods {
         return tempArray;
     }//ObterArquivo
 
-    public static void escreverRelatorioDeCompras(ArrayList<Veiculo> veiculos) {
+    public static void escreverRelatorioDeCompras(int codigo, String nome, int quantidade, double valorDeCompra) {
         try {
 
             PrintWriter arquivo = new PrintWriter("src\\arquivos\\relatorioDeCompras.txt");
 
-            for (String a : obterRelatorioDeCompras()) {
-                arquivo.write(a);
-            }
+//            for (String a : obterRelatorioDeCompras()) {
+//                arquivo.write(a);
+//            }
 
-            for (Veiculo veiculo : veiculos) {
-                arquivo.write(veiculo.getCodigo() + "," + veiculo.getNome() + "," + veiculo.getEstoque() + "," + veiculo.getValorDeCompra() +
-                        "," + veiculo.getEstoque() * veiculo.getValorDeCompra() + "\n");
 
-            }
+            arquivo.write(codigo + "," + nome + "," + quantidade + "," + valorDeCompra +
+                        "," + quantidade * valorDeCompra + "\n");
+            
             arquivo.close();
 
         } catch (FileNotFoundException e) {

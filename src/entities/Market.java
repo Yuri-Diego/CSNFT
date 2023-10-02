@@ -64,7 +64,7 @@ public class Market {
         todosOsVeiculos.add(veiculo);
         saldo -= veiculo.estoque * veiculo.valorDeCompra;
         ArchivesMethods.escreverArquivo(todosOsVeiculos);
-        ArchivesMethods.escreverRelatorioDeCompras(todosOsVeiculos);
+//        ArchivesMethods.escreverRelatorioDeCompras(veiculo.codigo,veiculo.toString(),quantidade,veiculo.valorDeCompra);
     }//Cadastrar
 
     public static void adicionar(int codigo, int quantidade) {
@@ -72,12 +72,12 @@ public class Market {
             if (quantidade * veiculo.valorDeCompra > saldo) {
                 System.out.println("\nSaldo insuficiente!");
             } else {
-                if (codigo == veiculo.getCodigo()) {
+                if (codigo == veiculo.codigo) {
                     veiculo.addEstoque(quantidade);
 
                     saldo -= quantidade * veiculo.valorDeCompra;
                     ArchivesMethods.escreverArquivo(todosOsVeiculos);
-                    ArchivesMethods.escreverRelatorioDeCompras(todosOsVeiculos);
+                    ArchivesMethods.escreverRelatorioDeCompras(veiculo.codigo,veiculo.nome,quantidade,veiculo.valorDeCompra);
                 }//If
             }
     	}//For
