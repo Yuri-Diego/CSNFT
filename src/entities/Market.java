@@ -2,17 +2,18 @@ package entities;
 
 import arquivos.ArchivesMethods;
 
-import java.io.*;
-import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Market {
 
     public static ArrayList<Veiculo> todosOsVeiculos = new ArrayList<>();
+    public static ArrayList<String> compras = new ArrayList<>();
+    public static ArrayList<String> vendas = new ArrayList<>();
+    private static final ArrayList<String> tempCompras = new ArrayList<>(); // Sessão atual
+    private static final ArrayList<String> tempVendas = new ArrayList<>(); // Sessão atual
     private static double saldo = 50000;
 
-    public static List<Veiculo> getTodosOsVeiculos() {
+    public static ArrayList<Veiculo> getTodosOsVeiculos() {
         return todosOsVeiculos;
     }
 
@@ -48,7 +49,6 @@ public class Market {
         //Executa a listagem
         if (quantidade == 0) {
             System.out.println("Não existe nenhum cadastro de " + categoria);
-
         } else {
 
             for (Veiculo veiculo : todosOsVeiculos) {
@@ -63,9 +63,10 @@ public class Market {
     public static void cadastrar(Veiculo veiculo) {
         todosOsVeiculos.add(veiculo);
         saldo -= veiculo.estoque * veiculo.valorDeCompra;
-        ArchivesMethods.escreverArquivo(todosOsVeiculos);
-        ArchivesMethods.escreverRelatorioDeCompras(ArchivesMethods.compras);
-//        ArchivesMethods.escreverRelatorioDeCompras(veiculo.codigo,veiculo.toString(),quantidade,veiculo.valorDeCompra);
+
+        //Salvando nos arquivos
+        ArchivesMethods.escreverVeiculos(todosOsVeiculos);
+        ArchivesMethods.escreverCompras(compras);
     }//Cadastrar
 
     public static void adicionar(int codigo, int quantidade) {
@@ -77,8 +78,13 @@ public class Market {
                     veiculo.addEstoque(quantidade);
 
                     saldo -= quantidade * veiculo.valorDeCompra;
-                    ArchivesMethods.escreverArquivo(todosOsVeiculos);
-                    ArchivesMethods.escreverRelatorioDeCompras(ArchivesMethods.compras);
+
+                    //Salvando nos arquivos
+                    ArchivesMethods.escreverVeiculos(todosOsVeiculos);
+                    ArchivesMethods.escreverCompras(compras);
+
+                    String tempString = veiculo.nome + "," + quantidade + "," + veiculo.valorDeCompra + "," + quantidade * veiculo.valorDeCompra;
+                    tempCompras.add(tempString);
                 }//If
             }
     	}//For
@@ -86,9 +92,9 @@ public class Market {
 
     public static void remover(int codigo) {
         for (Veiculo veiculo : todosOsVeiculos) {
-            if (codigo == veiculo.getCodigo()) {
+            if (codigo == veiculo.codigo) {
                 todosOsVeiculos.remove(veiculo);
-                ArchivesMethods.escreverArquivo(todosOsVeiculos);
+                ArchivesMethods.escreverVeiculos(todosOsVeiculos);
                 break;
             }//If
         }//For
@@ -96,34 +102,78 @@ public class Market {
 
     public static void vender(int codigo, int quantidade) {
     	for (Veiculo veiculo : todosOsVeiculos) {
-            if (verificarCodigoNaLista(codigo) && veiculo.getCodigo() == codigo) {
+            if (verificarCodigoNaLista(codigo) && veiculo.codigo == codigo) {
                 veiculo.remEstoque(quantidade);
 
                 saldo += quantidade * veiculo.valorDeVenda;
-                ArchivesMethods.escreverArquivo(todosOsVeiculos);
-                ArchivesMethods.escreverRelatorioDeVendas(todosOsVeiculos, quantidade);
+
+                //Salvando nos arquivos
+                String tempString = veiculo.nome + "," + quantidade + "," + veiculo.valorDeVenda + "," + quantidade * veiculo.valorDeVenda;
+                vendas.add(tempString);
+                tempVendas.add(tempString);
+
+                ArchivesMethods.escreverVeiculos(todosOsVeiculos);
+                ArchivesMethods.escreverVendas(vendas);
             }//If
     	}//For
     }//Vender
 
     public static void relatorio(int opcao) {
+        //neste método de acordo com a opção, ele mostra todo o histórico ou da sessão atual
+        // Os arrays criados neste método foram a fim de obter parte da string para fazer cálculos
+
         double totalGasto = 0.0;
+        double totalArrecadado = 0.0;
+
         switch (opcao) {
-            case 1:
-                System.out.println("RELATÓRIO DE COMPRAS:");
-                for (String a : ArchivesMethods.obterRelatorioDeCompras()) {
-                    System.out.println(a);
+            case 1: // Todo o histórico
+
+                //RELATÓRIO DE COMPRAS
+                System.out.println("RELATÓRIO DE COMPRAS:\n");
+                for (String a : ArchivesMethods.obterCompras()) {
+                    String[] tempArray = a.split(",");
+
+                    System.out.printf("Nome: %s | Unidades: %s | Valor da unidade: %s | Unidade x Valor: %s\n", tempArray[0], tempArray[1], tempArray[2], tempArray[3]);
+                    totalGasto += Double.parseDouble(tempArray[3]);
                 }
-                System.out.println("Valor total gasto: " + totalGasto);
+                System.out.println("\nValor total gasto: " + totalGasto + "\n");
+
+                //RELATÓRIO DE VENDAS
+                System.out.println("RELATÓRIO DE VENDAS:\n");
+                for (String a : ArchivesMethods.obterVendas()) {
+                    String[] tempArray = a.split(",");
+
+                    System.out.printf("Nome: %s | Unidades: %s | Valor da unidade: %s | Unidade x Valor: %s\n", tempArray[0], tempArray[1], tempArray[2], tempArray[3]);
+                    totalArrecadado += Double.parseDouble(tempArray[3]);
+                }
+                System.out.println("\nValor total arrecadado: " + totalArrecadado + "\n");
 
                 break;
-            case 2:
+            case 2: // Sessão atual
 
+                //RELATÓRIO DE COMPRAS
+                System.out.println("RELATÓRIO DE COMPRAS:\n");
+                for (String a : tempCompras) {
+                    String[] tempArray = a.split(",");
+
+                    System.out.printf("Nome: %s | Unidades: %s | Valor da unidade: %s | Unidade x Valor: %s\n", tempArray[0], tempArray[1], tempArray[2], tempArray[3]);
+                    totalGasto += Double.parseDouble(tempArray[3]);
+                }
+                System.out.println("Valor total gasto: " + totalGasto + "\n");
+
+                //RELATÓRIO DE VENDAS
+                System.out.println("RELATÓRIO DE VENDAS:\n");
+                for (String a : tempVendas) {
+                    String[] tempArray = a.split(",");
+
+                    System.out.printf("Nome: %s | Unidades: %s | Valor da unidade: %s | Unidade x Valor: %s\n", tempArray[0], tempArray[1], tempArray[2], tempArray[3]);
+                    totalArrecadado += Double.parseDouble(tempArray[3]);
+                }
+                System.out.println("\nValor total arrecadado: " + totalArrecadado + "\n");
                 break;
-
             default:
-        }
-    }
+        }//Switch
+    }//Relatorio
     public static boolean verificarCodigoNaLista(int codigo) {
         for (Veiculo veiculo : todosOsVeiculos) {
             if (codigo == veiculo.getCodigo() ) {
@@ -153,5 +203,12 @@ public class Market {
         }//For
         return null;
     }//getVeiculo
+
+    // "addCompra" criado na intenção de economizar e organizar linhas na classe Main
+    public static void addCompra(String nome, int quantidade, double valorDeCompra) {
+        String tempString = nome + "," + quantidade + "," + valorDeCompra + "," + quantidade * valorDeCompra;
+
+        compras.add(tempString);
+    }
 
 }//Class

@@ -1,1 +1,0 @@
-1,Carro,chevrolet,camaro,amarelo,2023,8,10.0,100.0,automatico,2.0

@@ -1,9 +1,6 @@
 package arquivos;
 
-import entities.Caminhao;
-import entities.Carro;
-import entities.Moto;
-import entities.Veiculo;
+import entities.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,10 +9,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ArchivesMethods {
-    public static ArrayList<String> compras = new ArrayList<>();
-    public static void escreverArquivo(ArrayList<Veiculo> veiculos) {
+
+    // Escreve no arquivo "veiculosCadastrados"
+    public static void escreverVeiculos(ArrayList<Veiculo> veiculos) {
         try {
-            PrintWriter arquivo = new PrintWriter("src\\arquivos\\todosOsVeiculos.txt");
+            PrintWriter arquivo = new PrintWriter("src\\arquivos\\veiculosCadastrados.txt");
 
             for (Veiculo veiculo : veiculos) {
                 arquivo.write(veiculo.toStringArquivo() + "\n");
@@ -25,12 +23,12 @@ public class ArchivesMethods {
         } catch (FileNotFoundException e){
             System.out.println("Arquivo não encontrado!");
         }
-    }
+    }//EscreverVeiculos
 
-    public static ArrayList<Veiculo> obterArquivo() {
+    // Obtem os dados do arquivo "veiculosCadastrados"
+    public static ArrayList<Veiculo> obterVeiculos() {
         ArrayList<Veiculo> tempArray = new ArrayList<>();
-
-        File arquivo = new File("src\\arquivos\\todosOsVeiculos.txt");
+        File arquivo = new File("src\\arquivos\\veiculosCadastrados.txt");
 
         try {
             Scanner sc = new Scanner(arquivo);
@@ -69,79 +67,89 @@ public class ArchivesMethods {
         return tempArray;
     }//ObterArquivo
 
-    public static void escreverRelatorioDeCompras(ArrayList<String> array) {
+    // Escreve no arquivo "Compras"
+    public static void escreverCompras(ArrayList<String> array) {
         try {
-
-            PrintWriter arquivo = new PrintWriter("src\\arquivos\\relatorioDeCompras.txt");
-
+            PrintWriter arquivo = new PrintWriter("src\\arquivos\\compras.txt");
             for (String a : array) {
                 arquivo.write(a + "\n");
             }
-            
             arquivo.close();
 
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo não encontrado!");
         }
-    }
+    }//EscreverCompras
 
-    public static void escreverRelatorioDeVendas(ArrayList<Veiculo> veiculos, int quantidadeVendida) {
+    // Escreve no arquivo "vendas"
+    public static void escreverVendas(ArrayList<String> array) {
         try {
-
-            PrintWriter arquivo = new PrintWriter("src\\arquivos\\relatorioDeVendas.txt");
-
-
-            for (Veiculo veiculo : veiculos) {
-                arquivo.write(veiculo.getCodigo() + "," + veiculo.getNome() + "," + quantidadeVendida + "," + veiculo.getValorDeVenda() + "\n");
+            PrintWriter arquivo = new PrintWriter("src\\arquivos\\vendas.txt");
+            for (String a : array) {
+                arquivo.write(a + "\n");
             }
-
             arquivo.close();
 
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo não encontrado!");
         }
-    }
+    }//EscreverVendas
 
-    public static ArrayList<String> obterRelatorioDeCompras() {
-        ArrayList<String> formaFinal = new ArrayList<>();
-        File arquivo = new File("src\\arquivos\\relatorioDeCompras.txt");
-
-        try {
-            Scanner sc = new Scanner(arquivo);
-
-            while (sc.hasNextLine()) {
-                formaFinal.add(sc.nextLine());
-
-            }
-
-            sc.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo não encontrado!");
-        }
-        return formaFinal;
-
-    }//ObterRelatorio
-
-    public static ArrayList<String> obterRelatorioDeVendas() {
-        ArrayList<String> formaFinal = new ArrayList<>();
-        File arquivo = new File("src\\arquivos\\relatorioDeVendas.txt");
+    // Obtem os dados do arquivo "compras"
+    public static ArrayList<String> obterCompras() {
+        ArrayList<String> listCompras = new ArrayList<>();
+        File arquivo = new File("src\\arquivos\\compras.txt");
 
         try {
             Scanner sc = new Scanner(arquivo);
-
             while (sc.hasNextLine()) {
-                String[] arrayString = sc.nextLine().split(",");
-
-                formaFinal.add(arrayString[0] + "," + arrayString[1 ] + "," + arrayString[2] + "," +
-                        arrayString[3] + "," + arrayString[4]);
-
+                listCompras.add(sc.nextLine());
             }
-
             sc.close();
+
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo não encontrado!");
         }
-        return formaFinal;
+        return listCompras;
+    }//ObterCompras
 
-    }//ObterRelatorio
+    // Obtem os dados do arquivo "vendas"
+    public static ArrayList<String> obterVendas() {
+        ArrayList<String> listVendas = new ArrayList<>();
+        File arquivo = new File("src\\arquivos\\vendas.txt");
+
+        try {
+            Scanner sc = new Scanner(arquivo);
+            while (sc.hasNextLine()) {
+                listVendas.add(sc.nextLine());
+            }
+            sc.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo não encontrado!");
+        }
+        return listVendas;
+    }//ObterVendas
+
+//    public static void saldo(double saldo) {
+//        try {
+//            PrintWriter arquivo = new PrintWriter("src\\arquivos\\saldo.txt");
+//            arquivo.write(String.format("%s", saldo));
+//
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Arquivo não encontrado!");
+//        }
+//    }
+//    public static double obterSaldo() {
+//        File arquivo = new File("src\\arquivos\\saldo.txt");
+//        double saldo = 0;
+//        try {
+//            Scanner sc = new Scanner(arquivo);
+//            saldo = Double.parseDouble(sc.nextLine());
+//            sc.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Arquivo não encontrado!");
+//        }
+//        return saldo;
+//    }
 }
