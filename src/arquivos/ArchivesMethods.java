@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ArchivesMethods {
+    public static ArrayList<String> compras = new ArrayList<>();
     public static void escreverArquivo(ArrayList<Veiculo> veiculos) {
         try {
             PrintWriter arquivo = new PrintWriter("src\\arquivos\\todosOsVeiculos.txt");
@@ -68,18 +69,14 @@ public class ArchivesMethods {
         return tempArray;
     }//ObterArquivo
 
-    public static void escreverRelatorioDeCompras(int codigo, String nome, int quantidade, double valorDeCompra) {
+    public static void escreverRelatorioDeCompras(ArrayList<String> array) {
         try {
 
             PrintWriter arquivo = new PrintWriter("src\\arquivos\\relatorioDeCompras.txt");
 
-//            for (String a : obterRelatorioDeCompras()) {
-//                arquivo.write(a);
-//            }
-
-
-            arquivo.write(codigo + "," + nome + "," + quantidade + "," + valorDeCompra +
-                        "," + quantidade * valorDeCompra + "\n");
+            for (String a : array) {
+                arquivo.write(a + "\n");
+            }
             
             arquivo.close();
 
@@ -96,7 +93,6 @@ public class ArchivesMethods {
 
             for (Veiculo veiculo : veiculos) {
                 arquivo.write(veiculo.getCodigo() + "," + veiculo.getNome() + "," + quantidadeVendida + "," + veiculo.getValorDeVenda() + "\n");
-
             }
 
             arquivo.close();
@@ -114,10 +110,7 @@ public class ArchivesMethods {
             Scanner sc = new Scanner(arquivo);
 
             while (sc.hasNextLine()) {
-                String[] arrayString = sc.nextLine().split(",");
-
-                formaFinal.add(arrayString[0] + "," + arrayString[1 ] + "," + arrayString[2] + "," +
-                        arrayString[3] + "," + arrayString[4]);
+                formaFinal.add(sc.nextLine());
 
             }
 

@@ -64,6 +64,7 @@ public class Market {
         todosOsVeiculos.add(veiculo);
         saldo -= veiculo.estoque * veiculo.valorDeCompra;
         ArchivesMethods.escreverArquivo(todosOsVeiculos);
+        ArchivesMethods.escreverRelatorioDeCompras(ArchivesMethods.compras);
 //        ArchivesMethods.escreverRelatorioDeCompras(veiculo.codigo,veiculo.toString(),quantidade,veiculo.valorDeCompra);
     }//Cadastrar
 
@@ -77,7 +78,7 @@ public class Market {
 
                     saldo -= quantidade * veiculo.valorDeCompra;
                     ArchivesMethods.escreverArquivo(todosOsVeiculos);
-                    ArchivesMethods.escreverRelatorioDeCompras(veiculo.codigo,veiculo.nome,quantidade,veiculo.valorDeCompra);
+                    ArchivesMethods.escreverRelatorioDeCompras(ArchivesMethods.compras);
                 }//If
             }
     	}//For
@@ -111,12 +112,7 @@ public class Market {
             case 1:
                 System.out.println("RELATÓRIO DE COMPRAS:");
                 for (String a : ArchivesMethods.obterRelatorioDeCompras()) {
-                    String[] arrayString = a.split(",");
-
-                    System.out.println(arrayString[0] + ": " + arrayString[1] + " | Estoque: " + arrayString[2] + " | Custo: " +
-                                       arrayString[3]);
-
-                    totalGasto += Double.parseDouble(arrayString[4]);
+                    System.out.println(a);
                 }
                 System.out.println("Valor total gasto: " + totalGasto);
 

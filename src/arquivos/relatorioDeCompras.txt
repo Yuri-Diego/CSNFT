@@ -1,1 +1,1 @@
-1,teste   2023,3,10.0,30.0
+Nome: chevrolet camaro amarelo 2023 | Unidades: 10 | Valor da unidade: 10.0 | Total: 100.0

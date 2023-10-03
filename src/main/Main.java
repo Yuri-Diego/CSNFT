@@ -116,11 +116,16 @@ public class Main {
                             if (escolha == 's') {
                                 System.out.print("Digite a quantidade que deseja adicionar ao estoque: ");
                                 int quantidade = sc.nextInt();
+
+                                ArchivesMethods.compras.add("Nome: " + veiculo.getNome() + " | Unidades: " + quantidade + " | Valor da unidade: " +
+                                                             valorDeCompra + " | Total: " + quantidade * valorDeCompra);
+
                                 Market.adicionar(veiculo.getCodigo(), quantidade);
                                 if (quantidade >= 0) {
                                     System.out.println("\n" + veiculo.getNome() + " | " + quantidade + " unidades adicionadas com sucesso!");
                                 }
                             }
+
 
                             break;
                         } else {
@@ -145,6 +150,10 @@ public class Main {
                         int quantidade = sc.nextInt();
 
                         if (quantidade * Market.getVeiculo(codigo).getValorDeCompra() <= Market.getSaldo()) {
+
+                            ArchivesMethods.compras.add("Nome: " + Market.getVeiculo(codigo).getNome() + " | Unidades: " + quantidade + " | Valor da unidade: " +
+                                                                   Market.getVeiculo(codigo).getValorDeCompra() + " | Total: " + quantidade * Market.getVeiculo(codigo).getValorDeCompra());
+
                             Market.adicionar(codigo, quantidade);
                             System.out.println("\n" + Market.getVeiculo(codigo).getNome() + " | " + quantidade + " unidades adicionadas com sucesso!");
                         } else {
