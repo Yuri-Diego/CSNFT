@@ -2,7 +2,11 @@ package entities;
 
 import arquivos.ArchivesMethods;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Market {
 
@@ -11,7 +15,8 @@ public class Market {
     public static ArrayList<String> vendas = new ArrayList<>();
     private static final ArrayList<String> tempCompras = new ArrayList<>(); // Sessão atual
     private static final ArrayList<String> tempVendas = new ArrayList<>(); // Sessão atual
-    private static double saldo = 50000;
+    
+    private static double saldo;
 
     public static ArrayList<Veiculo> getTodosOsVeiculos() {
         return todosOsVeiculos;
@@ -85,6 +90,7 @@ public class Market {
 
                     String tempString = veiculo.nome + "," + quantidade + "," + veiculo.valorDeCompra + "," + quantidade * veiculo.valorDeCompra;
                     tempCompras.add(tempString);
+                    ArchivesMethods.escreverSaldo(Market.getSaldo());
                 }//If
             }
     	}//For
@@ -114,6 +120,7 @@ public class Market {
 
                 ArchivesMethods.escreverVeiculos(todosOsVeiculos);
                 ArchivesMethods.escreverVendas(vendas);
+                ArchivesMethods.escreverSaldo(Market.getSaldo());
             }//If
     	}//For
     }//Vender

@@ -130,26 +130,30 @@ public class ArchivesMethods {
         }
         return listVendas;
     }//ObterVendas
-
-//    public static void saldo(double saldo) {
-//        try {
-//            PrintWriter arquivo = new PrintWriter("src\\arquivos\\saldo.txt");
-//            arquivo.write(String.format("%s", saldo));
-//
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Arquivo não encontrado!");
-//        }
-//    }
-//    public static double obterSaldo() {
-//        File arquivo = new File("src\\arquivos\\saldo.txt");
-//        double saldo = 0;
-//        try {
-//            Scanner sc = new Scanner(arquivo);
-//            saldo = Double.parseDouble(sc.nextLine());
-//            sc.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Arquivo não encontrado!");
-//        }
-//        return saldo;
-//    }
+    
+    public static void escreverSaldo(double saldo) {
+        try {
+        	PrintWriter arquivo = new PrintWriter("src\\arquivos\\saldo.txt");
+            arquivo.write(String.format("%.2f", saldo));
+            arquivo.close();
+            
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo não encontrado!");
+        }
+    }
+    public static double obterSaldo() {
+        File arquivo = new File("src\\arquivos\\saldo.txt");
+        double saldo = 0;
+        try {
+        	Scanner sc = new Scanner(arquivo);
+            while(sc.hasNextLine()) {
+            	String saldoTemp = sc.nextLine();
+            	saldo = Double.parseDouble(saldoTemp);
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo não encontrado!");
+        }
+        return saldo;
+    }
 }

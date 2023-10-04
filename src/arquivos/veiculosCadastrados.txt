@@ -1,0 +1,4 @@
+1,Moto,Honda,Fan,Preta,2023,32,1000.0,20000.0,160
+2,Carro,Renault,Sandero,Prata,2013,3,20000.0,40000.0,Manuel,1.0
+3,Caminhao,BABA,bebe,bibi,2044,0,200.0,5000.0,bipartido
+4,Carro,bubu,byby,bebe,2023,0,1000.0,20405.0,manual,3.0

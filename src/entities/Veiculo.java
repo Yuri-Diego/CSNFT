@@ -122,6 +122,8 @@ public class Veiculo {
 	public void remEstoque(int valor) {
 		if (valor >= 0) {
 			this.estoque -= valor;
+		} else {
+			System.out.println("Não pode vender quantidade negativa!");
 		}
 	}
 

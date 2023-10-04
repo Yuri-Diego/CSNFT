@@ -19,7 +19,7 @@ public class Main {
         
         //Obtendo dados dos arquivos
         Market.todosOsVeiculos = ArchivesMethods.obterVeiculos();
-        //Market.setSaldo(ArchivesMethods.obterSaldo());
+        Market.setSaldo(ArchivesMethods.obterSaldo());
         Market.compras = ArchivesMethods.obterCompras();
         Market.vendas = ArchivesMethods.obterVendas();
 
@@ -28,6 +28,7 @@ public class Main {
         while (opcao != 7) {
         	
             System.out.println("\n");
+            System.out.println("                                          Saldo no caixa = " + Market.getSaldo());
             System.out.println("                                    ~~~~~~[  MENU PRINCIPAL  ]~~~~~~");
             System.out.println("[ 1 ]-Listar  [ 2 ]-Cadastrar  [ 3 ]-Adicionar  [ 4 ]-Remover  [ 5 ]-Vender  [ 6 ]-Relatório  [ 7 ]-Sair");
             System.out.print(" ↪ ");
@@ -121,11 +122,12 @@ public class Main {
                                 System.out.print("Digite a quantidade que deseja adicionar ao estoque: ");
                                 int quantidade = sc.nextInt();
 
-                                // Salvando estoque nos arquivos
-                                Market.addCompra(veiculo.getNome(), quantidade, valorDeCompra);
-                                Market.adicionar(veiculo.getCodigo(), quantidade);
 
-                                if (quantidade >= 0) { // Feedback
+                                if (quantidade >= 0) { 
+                                	// Salvando estoque nos arquivos
+                                	Market.addCompra(veiculo.getNome(), quantidade, valorDeCompra);
+                                	Market.adicionar(veiculo.getCodigo(), quantidade);
+                                	// Feedback
                                     System.out.println("\n" + veiculo.getNome() + " | " + quantidade + " unidades adicionadas com sucesso!");
                                 }
                             }
@@ -147,6 +149,7 @@ public class Main {
                     }
                     System.out.print("Digite o código do veículo que deseja adicionar estoque: ");
                     int codigo = sc.nextInt(); // Pede o código
+                    System.out.println(Market.getVeiculo(codigo).getNome() + " | Estoque: " + Market.getVeiculo(codigo).getEstoque());
 
                     if (Market.verificarCodigoNaLista(codigo)) { // Verifica se o código existe na lista
 
@@ -155,12 +158,14 @@ public class Main {
 
                         if (quantidade * Market.getVeiculo(codigo).getValorDeCompra() <= Market.getSaldo()) { // Testando se tem saldo sulficiente
 
-                            // Salvando nova quantidade nos arquivos
-                            Market.addCompra(Market.getVeiculo(codigo).getNome(), quantidade, Market.getVeiculo(codigo).getValorDeCompra());
-                            Market.adicionar(codigo, quantidade);
 
-                            // Feedback
-                            System.out.println("\n" + Market.getVeiculo(codigo).getNome() + " | " + quantidade + " unidades adicionadas com sucesso!");
+                            if (quantidade >= 0) {
+                            	// Salvando nova quantidade nos arquivos
+                            	Market.addCompra(Market.getVeiculo(codigo).getNome(), quantidade, Market.getVeiculo(codigo).getValorDeCompra());
+                            	Market.adicionar(codigo, quantidade);
+                            	// Feedback
+                            	System.out.println("\n" + quantidade + " unidades adicionadas com sucesso!");                            	
+                            }
                         } else {
                             System.out.println("Saldo insulficiente!");
                         }
@@ -220,13 +225,17 @@ public class Main {
                     } //else {
                         System.out.print("Digite o código do veículo que deseja vender: ");
                         codigo = sc.nextInt(); // Pede o código
+                        System.out.println( Market.getVeiculo(codigo).getNome() + " | Estoque: " + Market.getVeiculo(codigo).getEstoque()); // Feedback
                         if (Market.verificarCodigoNaLista(codigo)) { // Verifica se o código existe na lista
                             System.out.print("Digite a quantidade que deseja vender: ");
                             int quantidade = sc.nextInt(); // Quantidade a ser vendida
 
-                            if (quantidade <= Market.getVeiculo(codigo).getEstoque()) {
-                                Market.vender(codigo, quantidade); // Vende e faz as alterações nos arquivos
-                                System.out.println("\n" + Market.getVeiculo(codigo).getNome() + " | " + quantidade + " unidades vendidas com sucesso!");//Feedback
+                            if (quantidade <= Market.getVeiculo(codigo).getEstoque()) {                                
+                                if (quantidade >= 0) {
+                                	Market.vender(codigo, quantidade); // Vende e faz as alterações nos arquivos
+                                	//Feedback
+                                	System.out.println("\n" + quantidade + " unidades vendidas com sucesso!");                   	                         	
+                                }
 
                             } else {
                                 System.out.println("\n" + "Só temos " + Market.getVeiculo(codigo).getEstoque() + " unidades disponíveis no estoque!");//Feedback
@@ -260,7 +269,5 @@ public class Main {
             }//Switch
         }//While
         sc.close();
-//        ArchivesMethods.saldo(Market.getSaldo());
-//        System.out.println(Market.getSaldo());
     }//Método main
 }//Class
