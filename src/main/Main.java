@@ -5,6 +5,7 @@ package main;
 //Silas Miguel Sarmento Araújo
 //João Vitor Pereira da Silva
 //Yuri Diego Almeida Silva dos Santos
+//Diego dos Santos Silva
 
 import arquivos.ArchivesMethods;
 import entities.*;
@@ -219,14 +220,14 @@ public class Main {
                     break;
                 case 5: // Vender
 
-                    if (Market.todosOsVeiculos.size() == 0) { // Verifica se existe veículos cadastrados
+                    if (Market.todosOsVeiculos.size() == 0) {  // Verifica se existe veículos cadastrados
                         System.out.println("Não existe veículo cadastrado no sistema!");
                         break;
-                    } //else {
+                    } else {
                         System.out.print("Digite o código do veículo que deseja vender: ");
                         codigo = sc.nextInt(); // Pede o código
-                        System.out.println( Market.getVeiculo(codigo).getNome() + " | Estoque: " + Market.getVeiculo(codigo).getEstoque()); // Feedback
                         if (Market.verificarCodigoNaLista(codigo)) { // Verifica se o código existe na lista
+                            System.out.println( Market.getVeiculo(codigo).getNome() + " | Estoque: " + Market.getVeiculo(codigo).getEstoque()); // Feedback
                             System.out.print("Digite a quantidade que deseja vender: ");
                             int quantidade = sc.nextInt(); // Quantidade a ser vendida
 
@@ -244,7 +245,7 @@ public class Main {
                         } else {
                             System.out.println("\nNão existe veículo com este código!");
                         }//Else
-                  //  }//Else
+                    }//Else
                     break;
 
                 case 6: // Relatório
